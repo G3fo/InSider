@@ -1,3 +1,10 @@
+var fullName = ""
+var party = ""
+var state = ""
+var seniority = ""
+var votes_with_party = ""
+
+
 var data = {
   "status":"OK",
   "copyright":" Copyright (c) 2019 Pro Publica Inc. All Rights Reserved.",
@@ -4844,3 +4851,19 @@ var data = {
      }
   ]
 }
+
+
+
+	
+document.getElementById("senate-data").innerHTML = createTable();
+function createTable(){
+  for (var i = 0; i < data[results].length; i++) {
+    document.write("<tr>");	
+      for(var b=0; b<5; b++) {
+        document.write("<td>" + data[results[b]] + "</td>");
+      }
+    document.write("</tr>");
+  }
+}
+
+  createTable();
