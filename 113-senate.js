@@ -1,15 +1,3 @@
-var fullName = ""
-var party = ""
-var state = ""
-var seniority = ""
-var votes_with_party = ""
-
-for (var i=0; i < data.length; i++) {
-
-  document.getElementById("senateData")[i].innerHTML = data[i].first_name;
-}
-
-
 var data = {
   "status":"OK",
   "copyright":" Copyright (c) 2019 Pro Publica Inc. All Rights Reserved.",
@@ -4858,42 +4846,27 @@ var data = {
 }
 
 
+var members = data.results[0].members  //desglose del json para llegar a los members, cuando abra members ya voy a poder llamar a los valores
+var html = "" //esto es lo que va adentro del div <table>, que voy a modificar en la funcion
+
 function tableCreate(){
-  var body = document.body,
-      tbl  = document.createElement('table');
-  tbl.style.width  = '100px';
-  tbl.style.border = '1px solid black';
 
-  for(var i = 0; i < 3; i++){
-      var tr = tbl.insertRow();
-      for(var j = 0; j < 2; j++){
-          if(i == 2 && j == 1){
-              break;
-          } else {
-              var td = tr.insertCell();
-              td.appendChild(document.createTextNode('Cell'));
-              td.style.border = '1px solid black';
-              if(i == 1 && j == 1){
-                  td.setAttribute('rowSpan', '2');
-              }
-          }
-      }
+  for (var i = 0; i < members.length ; i++){
+    html = html + "<tr>" + "<td>" + members[i].first_name + " " + members[i].last_name + "</td><td>" +  //con members[i].nombreDeLaKey me devuelve los valores, en este caso los nombres, y concateno para hacer el fullname
+    + members[i].party + "</td><td>" //acá saco la party (aunque no me la esta dando no se por que)
+    + members[i].state + "</td><td>" //etc
+    + members[i].seniority + "</td><td>" +
+    + members[i].votes_with_party_pct + "%" + "</td><td>";
+    
+    console.log(members[i].party)
+    
+    "</tr>"
   }
-  body.appendChild(tbl);
+
+  return html 
+
 }
+
 tableCreate();
-
-
-	
-document.getElementById("senate-data").innerHTML = createTable();
-function createTable(){
-  for (var i = 0; i < data[i].length; i++) {
-    document.write("<tr>");	
-      for(var b=0; b<6; b++) {
-        document.write("<td>" + data[i] + "</td>");
-      }
-    document.write("</tr>");
-  }
-}
-
-  createTable();
+//console.log(tableCreate())
+document.getElementById("senateData").innerHTML = html
