@@ -4,6 +4,11 @@ var state = ""
 var seniority = ""
 var votes_with_party = ""
 
+for (var i=0; i < data.length; i++) {
+
+  document.getElementById("senateData")[i].innerHTML = data[i].first_name;
+}
+
 
 var data = {
   "status":"OK",
@@ -4853,14 +4858,39 @@ var data = {
 }
 
 
+function tableCreate(){
+  var body = document.body,
+      tbl  = document.createElement('table');
+  tbl.style.width  = '100px';
+  tbl.style.border = '1px solid black';
+
+  for(var i = 0; i < 3; i++){
+      var tr = tbl.insertRow();
+      for(var j = 0; j < 2; j++){
+          if(i == 2 && j == 1){
+              break;
+          } else {
+              var td = tr.insertCell();
+              td.appendChild(document.createTextNode('Cell'));
+              td.style.border = '1px solid black';
+              if(i == 1 && j == 1){
+                  td.setAttribute('rowSpan', '2');
+              }
+          }
+      }
+  }
+  body.appendChild(tbl);
+}
+tableCreate();
+
 
 	
 document.getElementById("senate-data").innerHTML = createTable();
 function createTable(){
-  for (var i = 0; i < data[results].length; i++) {
+  for (var i = 0; i < data[i].length; i++) {
     document.write("<tr>");	
-      for(var b=0; b<5; b++) {
-        document.write("<td>" + data[results[b]] + "</td>");
+      for(var b=0; b<6; b++) {
+        document.write("<td>" + data[i] + "</td>");
       }
     document.write("</tr>");
   }
