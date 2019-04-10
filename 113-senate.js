@@ -4845,7 +4845,6 @@ var data = {
   ]
 }
 
-
 var members = data.results[0].members  //desglose del json para llegar a los members, cuando abra members ya voy a poder llamar a los valores
 var html = "" //defino lo que va adentro del div <table>, que voy a modificar en la funcion
 
@@ -4878,6 +4877,10 @@ var html = members.reduce(function (item, j) {
   return item + convertirALinea(j)
 }, "");
 
+
+document.getElementById("senateData").innerHTML = html  
+
+
 // 
 // function tableCreate() {
 //   for (var i = 0; i < members.length; i++) {
@@ -4909,4 +4912,3 @@ var html = members.reduce(function (item, j) {
 // }
 
 // tableCreate();  //llamo a la funcion ANTES de asignar el html al div en el html
-document.getElementById("senateData").innerHTML = html  
