@@ -20715,5 +20715,25 @@ var data = {
   ]
 }
 
+var members = data.results[0].members  //desglose del json para llegar a los members, cuando abra members ya voy a poder llamar a los valores
+var html = "" //esto es lo que va adentro del div <table>, que voy a modificar en la funcion
 
+function tableCreate(){
 
+  for (var i = 0; i < members.length ; i++){
+
+    html = html + "<tr>" + "<td>" + members[i].first_name + " " + members[i].last_name + "</td><td>"  //con members[i].nombreDeLaKey me devuelve los valores, en este caso los nombres, y concateno para hacer el fullname
+    + members[i].party + "</td><td>" //acá saco la party (aunque no me la esta dando no se por que)
+    + members[i].state + "</td><td>" //etc
+    + members[i].seniority + "</td><td>"
+    + members[i].votes_with_party_pct + "%" + "</td><td>";
+
+    "</tr>"
+  }
+
+  return html 
+
+}
+
+tableCreate();
+document.getElementById("houseData").innerHTML = html
