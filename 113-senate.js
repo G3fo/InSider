@@ -4849,6 +4849,7 @@ var members = data.results[0].members  //desglose del json para llegar a los mem
 var html = "" //defino lo que va adentro del div <table>, que voy a modificar en la funcion
 
 function convertirALinea(member) {
+  
   if (!member.first_name) {
     return ""
   }
@@ -4856,19 +4857,15 @@ function convertirALinea(member) {
   var linea = "<tr>" + "<td>" + "<a href='" + member.url + "'>" //Convierte a link el nombre del senador  
     + member.first_name + " ";
 
-  if (member.middle_name !== null) {
-    linea = linea + member.middle_name
-  }
+    member.middle_name != null ? linea = linea + member.middle_name : "";
 
   linea = linea
-    + member.last_name + "</a>" + "</td><td>"  //con item.nombreDeLaKey me devuelve los valores, en este caso los nombres, y concateno para hacer el fullname
-    + member.party + "</td><td>" //acá saco la party
-    + member.state + "</td><td>" //etc
+    + member.last_name + "</a>" + "</td><td>"  
+    + member.party + "</td><td>" 
+    + member.state + "</td><td>" 
     + member.seniority + "</td><td>"
     + member.votes_with_party_pct + "%" + "</td><td>";
-
   "</tr>"
-
   return linea
 }
 
