@@ -20722,8 +20722,9 @@ function tableCreate(){
 
   for (var i = 0; i < members.length ; i++){
 
-    html = html + "<tr>" + "<td>" + members[i].first_name + " " + members[i].last_name + "</td><td>"  //con members[i].nombreDeLaKey me devuelve los valores, en este caso los nombres, y concateno para hacer el fullname
-    + members[i].party + "</td><td>" //acá saco la party (aunque no me la esta dando no se por que)
+    html = html + "<tr>" + "<td>" + "<a href='" + members[i].url + "'>"  //Convierte a link el nombre del senador  
+    + members[i].first_name + " " + members[i].last_name + "</a>" + "</td><td>"  //con members[i].nombreDeLaKey me devuelve los valores, en este caso los nombres, y concateno para hacer el fullname
+    + members[i].party + "</td><td>" //acá saco la party
     + members[i].state + "</td><td>" //etc
     + members[i].seniority + "</td><td>"
     + members[i].votes_with_party_pct + "%" + "</td><td>";
