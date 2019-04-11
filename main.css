@@ -1,0 +1,23 @@
+* {
+  text-align: justify;
+}
+
+.container{
+  margin-top: 5px;
+}
+
+.navbar{
+  border-radius: 5px;
+  margin-top: 0px;
+}
+
+.sticky {
+  position: top;
+  position: fixed;
+  position: center;
+}
+
+.sticky + .content {
+
+
+}

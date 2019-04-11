@@ -4860,7 +4860,7 @@ function convertirALinea(member) {
     member.middle_name != null ? linea = linea + member.middle_name : "";
 
   linea = linea
-    + member.last_name + "</a></td><td>"  
+    + " " + member.last_name + "</a></td><td>"  
     + member.party + "</td><td>" 
     + member.state + "</td><td>" 
     + member.seniority + "</td><td>"
@@ -4876,6 +4876,8 @@ var html = members.reduce(function (item, j) {
 
 
 document.getElementById("senateData").innerHTML = html  
+
+
 
 
 // 

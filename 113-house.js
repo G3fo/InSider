@@ -20716,14 +20716,18 @@ var data = {
 }
 
 var members = data.results[0].members  //desglose del json para llegar a los members, cuando abra members ya voy a poder llamar a los valores
-var html = "" //esto es lo que va adentro del div <table>, que voy a modificar en la funcion
+var table = "" //esto es lo que va adentro del div <table>, que voy a modificar en la funcion
 
 function tableCreate(){
 
   for (var i = 0; i < members.length ; i++){
 
-    html = html + "<tr>" + "<td>" + "<a href='" + members[i].url + "'>"  //Convierte a link el nombre del senador  
-    + members[i].first_name + " " + members[i].last_name + "</a>" + "</td><td>"  //con members[i].nombreDeLaKey me devuelve los valores, en este caso los nombres, y concateno para hacer el fullname
+    table = table + "<tr>" + "<td>" + "<a href='" + members[i].url + "'>"  //Convierte a link el nombre del senador  
+    + members[i].first_name + " ";
+    
+    members[i].middle_name != null ? table = table + members[i].middle_name : "";
+    
+    table = table + " " + members[i].last_name + "</a>" + "</td><td>"  //con members[i].nombreDeLaKey me devuelve los valores, en este caso los nombres, y concateno para hacer el fullname
     + members[i].party + "</td><td>" //acá saco la party
     + members[i].state + "</td><td>" //etc
     + members[i].seniority + "</td><td>"
@@ -20731,10 +20735,8 @@ function tableCreate(){
 
     "</tr>"
   }
-
-  return html 
-
+  return table 
 }
 
 tableCreate();
-document.getElementById("houseData").innerHTML = html
+document.getElementById("houseData").innerHTML = table
