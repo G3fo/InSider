@@ -17,13 +17,19 @@ tr{
   width: auto;
 }
 
-/*
-.sticky {
-  position: fixed;
-  justify-content: center;
+footer p{
+  text-align: center;
+  padding: 10px;
+  margin: auto;
 }
 
-.sticky + .content {
+/*
+.stickynav {
+  position: fixed;
+
+}
+
+.stickynav + .content {
   padding-top: 55px;
   justify-content: center;
 }
@@ -37,5 +43,4 @@ header{
   width: 100%;
   height: 1px;
 }
-
 */
