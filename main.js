@@ -2,20 +2,23 @@
 //KEY: cYMTdFJS13jzEeSby2onJewefObRpQKCL6NOReqD 
 
 
-// When the user scrolls the page, execute myFunction 
-window.onscroll = function() {myFunction()};
+// Cuando el usuario scrollea, ejecuta my function
+window.onscroll = function() {agregaClasesADivs()};
 
-// Get the navbar
+//  Agarra la navbar y el header
 var navbar = document.getElementById("navbar");
+var header = document.getElementById("header");
 
-// Get the offset position of the navbar
+// Obtiene la posicion de la navbar
 var sticky = navbar.offsetTop;
 
-// Add the sticky class to the navbar when you reach its scroll position. Remove "sticky" when you leave the scroll position
-function myFunction() {
+// Agrega la propiedad "sticky" cuando scrolleas, la saca cuando volves a la posicion default de la navbar
+function agregaClasesADivs() {
   if (window.pageYOffset >= sticky) {
     navbar.classList.add("sticky")
+    header.classList.add("header0px")
   } else {
     navbar.classList.remove("sticky");
+    header.classList.remove("header0px")
   }
 }
