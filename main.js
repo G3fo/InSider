@@ -2,8 +2,11 @@
 //KEY: cYMTdFJS13jzEeSby2onJewefObRpQKCL6NOReqD 
 
 
+//Hice todo esto al pedo porque bootstrap tiene una clase que se llama sticky-top que hace esto por vos.
+
+
 // Cuando el usuario scrollea, ejecuta my function
-window.onscroll = function() {agregaClasesADivs()};
+//window.onscroll = function() {agregaClasesADivs()};
 
 //  Agarra la navbar y el header
 var navbar = document.getElementById("navbar");

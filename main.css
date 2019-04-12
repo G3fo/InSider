@@ -4,16 +4,28 @@
 
 
 .navbar{
-  border-radius: 2px;
-  margin: 0 auto;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+
 }
 
+.content{
+  margin-top: 10px;
+}
+
+tr{
+  width: auto;
+}
+
+/*
 .sticky {
   position: fixed;
+  justify-content: center;
 }
 
 .sticky + .content {
   padding-top: 55px;
+  justify-content: center;
 }
 
 .header0px{
@@ -25,3 +37,5 @@ header{
   width: 100%;
   height: 1px;
 }
+
+*/

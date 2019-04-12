@@ -20731,7 +20731,7 @@ function tableCreate(){
     + members[i].party + "</td><td>" //acá saco la party
     + members[i].state + "</td><td>" //etc
     + members[i].seniority + "</td><td>"
-    + members[i].votes_with_party_pct + "%" + "</td><td>";
+    + members[i].votes_with_party_pct + "%" + "</td>";
 
     "</tr>"
   }

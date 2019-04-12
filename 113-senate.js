@@ -4864,7 +4864,7 @@ function convertirALinea(member) {
     + member.party + "</td><td>" 
     + member.state + "</td><td>" 
     + member.seniority + "</td><td>"
-    + member.votes_with_party_pct + "%" + "</td><td>";
+    + member.votes_with_party_pct + "%" + "</td>";
   "</tr>"
   return linea
 }
