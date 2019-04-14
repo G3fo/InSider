@@ -2,11 +2,28 @@
   text-align: justify;
 }
 
+header{
+  margin-top: 10px;
+  margin-bottom: 10px;
+  height: 75px;
+  width: 100%;
+  display: flex;
+}
+
+
+
+* {
+  text-decoration: none !important;
+}
+
+#logo{
+  height: 75px;
+  
+}
 
 .navbar{
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
-
 }
 
 .content{
@@ -17,19 +34,15 @@ tr{
   width: auto;
 }
 
-
-footer p{
-  text-align: center;
-  padding: 10px;
-  margin: auto;
-}
-
-#contenedor-total {
+#page-container {
   position: relative;
-  min-height: 100vh;
+  height: 100vh;
 }
 
-
+#content-wrap{
+  position: relative;
+  margin-bottom: 3em;
+}
 
 #footer{  
   position: absolute;
@@ -37,6 +50,14 @@ footer p{
   width: 100%;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
+  height: 3em;
+  margin-bottom: 0px;
+}
+
+footer p{
+  text-align: center;
+  padding: 10px;
+  margin: auto;
 }
 
 .card-header {
