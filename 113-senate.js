@@ -4848,6 +4848,19 @@ var data = {
 var members = data.results[0].members  //desglose del json para llegar a los members, cuando abra members ya voy a poder llamar a los valores
 var html = "" //defino lo que va adentro del div <table>, que voy a modificar en la funcion
 
+var senatorStates = ["TX"];
+
+
+function getEveryState(){
+  for (var i = 0; i < members.length; i++){
+    senatorStates = senatorStates + senatorStates.push(members[i].state);
+  }
+  return senatorStates
+}
+
+console.log(getEveryState());
+
+
 function convertirALinea(member) {
   
   if (!member.first_name) {
