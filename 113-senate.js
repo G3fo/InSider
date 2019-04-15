@@ -4848,18 +4848,6 @@ var data = {
 var members = data.results[0].members  //desglose del json para llegar a los members, cuando abra members ya voy a poder llamar a los valores
 var html = "" //defino lo que va adentro del div <table>, que voy a modificar en la funcion
 
-var senatorStates = ["TX"];
-
-
-function getEveryState(){
-  for (var i = 0; i < members.length; i++){
-    senatorStates = senatorStates + senatorStates.push(members[i].state);
-  }
-  return senatorStates
-}
-
-console.log(getEveryState());
-
 
 function convertirALinea(member) {
   
@@ -4867,7 +4855,7 @@ function convertirALinea(member) {
     return ""
   }
 
-  var linea = "<tr>" + "<td>" + "<a href='" + member.url + "'>" //Convierte a link el nombre del senador  
+  var linea = "<tr " + "class= '" + member.party + "' '" + member.state + "'>" + "<td>" + "<a href='" + member.url + "'>" //Convierte a link el nombre del senador  
     + member.first_name + " ";
 
     member.middle_name != null ? linea = linea + member.middle_name : "";
@@ -4886,7 +4874,6 @@ function convertirALinea(member) {
 var html = members.reduce(function (item, j) {
   return item + convertirALinea(j)
 }, "");
-
 
 document.getElementById("senateData").innerHTML = html  
 

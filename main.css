@@ -10,7 +10,9 @@ header{
   display: flex;
 }
 
-
+.hide{
+  display: none;
+}
 
 * {
   text-decoration: none !important;

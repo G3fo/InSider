@@ -58,11 +58,9 @@
 
 	<div class="container content" id="checkboxes">
 		<p>Filter by Party: </p>
-		<label><input type="radio" name="party" id="republican"> Republican </label>
-		<label><input type="radio" name="party" id="democrat"> Democrat </label>
-		<label><input type="radio" name="party" id="independent"> Independent </label>
-
-
+		<label><input type="radio" name="party" id="republican" onchange="partyFilter('R')"> Republican </label>
+		<label><input type="radio" name="party" id="democrat" onchange="partyFilter('D')"> Democrat </label>
+		<label><input type="radio" name="party" id="independent" onchange="partyFilter('I')"> Independent </label>
 	</div>
 
 	<table class="container table table-striped table-hover">

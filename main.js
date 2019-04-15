@@ -6,7 +6,7 @@
 
 
 // Cuando el usuario scrollea, ejecuta my function
-window.onscroll = function() {agregaClasesADivs()};
+window.onscroll = function () { agregaClasesADivs() };
 
 //  Agarra la navbar y el header
 var navbar = document.getElementById("navbar");
@@ -23,3 +23,42 @@ function agregaClasesADivs() {
     navbar.classList.remove("sticky-top");
   }
 }
+
+
+var republicans = document.getElementsByClassName("R");
+var democrats = document.getElementsByClassName("D");
+var independent = document.getElementsByClassName("I");
+
+
+//checkedOption = document.querySelector('party:checked').value;
+
+//addEventListener.querySelector("party:checked", function () { var checkedOption = document.querySelector('party:checked').value })
+//addEventListener.querySelector("party:checked", partyFilter())
+
+
+function partyFilter(selectedParty) {
+
+  if (selectedParty == "R") {
+    for (var i = 0; i < republicans.length; i++) {
+      democrats.classList.add("hide");
+      independent.classList.add("hide");
+      republicans[i].classList.remove("hide");
+    }
+  }
+  else if (selectedParty == "D") {
+    for (var i = 0; i < democrats.length; i++) {
+      republicans.classList.add("hide");
+      independent.classList.add("hide");
+      democrats[i].classList.remove("hide");
+    }
+  }
+  else (selectedParty == "I");{
+    for (var i = 0; i < independent.length; i++) {
+      republicans.classList.add("hide");
+      democrats.classList.add("hide");
+      independent[i].classList.remove("hide");
+    }
+  }
+}
+
+

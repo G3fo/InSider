@@ -20722,7 +20722,9 @@ function tableCreate(){
 
   for (var i = 0; i < members.length ; i++){
 
-    table = table + "<tr>" + "<td>" + "<a href='" + members[i].url + "'>"  //Convierte a link el nombre del senador  
+    table = table + "<tr " + "class= '" + members[i].party + "' '" + members[i].state + "'>" + "<td>"
+    
+    + "<a href='" + members[i].url + "'>"  //Convierte a link el nombre del senador  
     + members[i].first_name + " ";
     
     members[i].middle_name != null ? table = table + members[i].middle_name : "";
@@ -20740,3 +20742,4 @@ function tableCreate(){
 
 tableCreate();
 document.getElementById("houseData").innerHTML = table
+
