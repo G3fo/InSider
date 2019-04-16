@@ -24,41 +24,73 @@ function agregaClasesADivs() {
   }
 }
 
-
 var republicans = document.getElementsByClassName("R");
 var democrats = document.getElementsByClassName("D");
 var independent = document.getElementsByClassName("I");
 
 
-//checkedOption = document.querySelector('party:checked').value;
+function republicanFilter(selectedParty) {
 
-//addEventListener.querySelector("party:checked", function () { var checkedOption = document.querySelector('party:checked').value })
-//addEventListener.querySelector("party:checked", partyFilter())
-
-
-function partyFilter(selectedParty) {
-
-  if (selectedParty == "R") {
+  if (selectedParty === "R") {
     for (var i = 0; i < republicans.length; i++) {
-      democrats.classList.add("hide");
-      independent.classList.add("hide");
       republicans[i].classList.remove("hide");
     }
-  }
-  else if (selectedParty == "D") {
     for (var i = 0; i < democrats.length; i++) {
-      republicans.classList.add("hide");
-      independent.classList.add("hide");
-      democrats[i].classList.remove("hide");
+      democrats[i].classList.add("hide");
     }
-  }
-  else (selectedParty == "I");{
     for (var i = 0; i < independent.length; i++) {
-      republicans.classList.add("hide");
-      democrats.classList.add("hide");
-      independent[i].classList.remove("hide");
+      independent[i].classList.add("hide");
     }
   }
 }
 
+function democratFilter(selectedParty) {
+  if (selectedParty === "D") {
+    for (var i = 0; i < democrats.length; i++) {
+      democrats[i].classList.remove("hide");
+    }
+    for (var i = 0; i < independent.length; i++) {
+      independent[i].classList.add("hide");
+    }
+    for (var i = 0; i < republicans.length; i++) {
+      republicans[i].classList.add("hide");
+    }
+  }
+}
+
+function independentFilter(selectedParty) {
+  if (selectedParty === "I"); {
+    for (var i = 0; i < independent.length; i++) {
+      independent[i].classList.remove("hide");
+    }
+    for (var i = 0; i < republicans.length; i++) {
+      republicans[i].classList.add("hide");
+    }
+    for (var i = 0; i < democrats.length; i++) {
+      democrats[i].classList.add("hide");
+    }
+  }
+}
+
+function filterName() {
+  // Declare variables 
+  var input, filter, table, tr, td, i, txtValue;
+  input = document.getElementById("myInput");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("senateData");
+  tr = table.getElementsByTagName("tr");
+
+  // Loop through all table rows, and hide those who don't match the search query
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[0];
+    if (td) {
+      txtValue = td.textContent || td.innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    } 
+  }
+}
 

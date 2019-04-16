@@ -4849,23 +4849,23 @@ var members = data.results[0].members  //desglose del json para llegar a los mem
 var html = "" //defino lo que va adentro del div <table>, que voy a modificar en la funcion
 
 
-function convertirALinea(member) {
+function convertirALinea(members) {
   
-  if (!member.first_name) {
+  if (!members.first_name) {
     return ""
   }
 
-  var linea = "<tr " + "class= '" + member.party + "' '" + member.state + "'>" + "<td>" + "<a href='" + member.url + "'>" //Convierte a link el nombre del senador  
-    + member.first_name + " ";
+  var linea = "<tr " + "class= '" + members.party + "' '" + members.state + "'>" + "<td>" + "<a href='" + members.url + "'>" //Convierte a link el nombre del senador  
+    + members.first_name + " ";
 
-    member.middle_name != null ? linea = linea + member.middle_name : "";
+    members.middle_name != null ? linea = linea + members.middle_name : "";
 
   linea = linea
-    + " " + member.last_name + "</a></td><td>"  
-    + member.party + "</td><td>" 
-    + member.state + "</td><td>" 
-    + member.seniority + "</td><td>"
-    + member.votes_with_party_pct + "%" + "</td>";
+    + " " + members.last_name + "</a></td><td>"  
+    + members.party + "</td><td>" 
+    + members.state + "</td><td>" 
+    + members.seniority + "</td><td>"
+    + members.votes_with_party_pct + "%" + "</td>";
   "</tr>"
   return linea
 }

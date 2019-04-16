@@ -13,6 +13,10 @@
 <body>
 
 	<nav id="navbar" class="container navbar navbar-expand-md navbar-light bg-light border">
+		<a class="navbar-brand" href="#">
+			<img src="Images/iconHouse2.png" width="30" height="30" class="d-inline-block align-top" alt="">
+			TGIF
+		</a>
 
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
 			aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -42,6 +46,11 @@
 
 				</li>
 			</ul>
+
+			<form class="form-inline my-2 my-lg-0">
+					<input class="form-control mr-sm-2" type="search" id="searchInput" placeholder="Search for name..." aria-label="Search" onkeyup="filterName()">
+			</form>
+
 		</div>
 	</nav>
 
@@ -58,12 +67,12 @@
 
 	<div class="container content" id="checkboxes">
 		<p>Filter by Party: </p>
-		<label><input type="radio" name="party" id="republican" onchange="partyFilter('R')"> Republican </label>
-		<label><input type="radio" name="party" id="democrat" onchange="partyFilter('D')"> Democrat </label>
-		<label><input type="radio" name="party" id="independent" onchange="partyFilter('I')"> Independent </label>
+		<label><input type="radio" name="party" id="republican" onchange='republicanFilter("R")'> Republican </label>
+		<label><input type="radio" name="party" id="democrat" onchange='democratFilter("D")'> Democrat </label>
+		<label><input type="radio" name="party" id="independent" onchange='independentFilter("I")'> Independent </label>
 	</div>
 
-	<table class="container table table-striped table-hover">
+	<table class="container table table-hover">
 		<thead>
 			<tr>
 				<td>Name</td>
