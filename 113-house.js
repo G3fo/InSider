@@ -1,4 +1,4 @@
-var data = {
+var houseData = {
   "status":"OK",
   "copyright":" Copyright (c) 2019 Pro Publica Inc. All Rights Reserved.",
   "results":[
@@ -20714,32 +20714,3 @@ var data = {
      }
   ]
 }
-
-var members = data.results[0].members  //desglose del json para llegar a los members, cuando abra members ya voy a poder llamar a los valores
-var table = "" //esto es lo que va adentro del div <table>, que voy a modificar en la funcion
-
-function tableCreate(){
-
-  for (var i = 0; i < members.length ; i++){
-
-    table = table + "<tr " + "class= '" + members[i].party + "' '" + members[i].state + "'>" + "<td>"
-    
-    + "<a href='" + members[i].url + "'>"  //Convierte a link el nombre del senador  
-    + members[i].first_name + " ";
-    
-    members[i].middle_name != null ? table = table + members[i].middle_name : "";
-    
-    table = table + " " + members[i].last_name + "</a>" + "</td><td>"  //con members[i].nombreDeLaKey me devuelve los valores, en este caso los nombres, y concateno para hacer el fullname
-    + members[i].party + "</td><td>" //acá saco la party
-    + members[i].state + "</td><td>" //etc
-    + members[i].seniority + "</td><td>"
-    + members[i].votes_with_party_pct + "%" + "</td>";
-
-    "</tr>"
-  }
-  return table 
-}
-
-tableCreate();
-document.getElementById("houseData").innerHTML = table
-

@@ -1,4 +1,4 @@
-var data = {
+var senateData = {
   "status": "OK",
   "copyright": " Copyright (c) 2019 Pro Publica Inc. All Rights Reserved.",
   "results": [
@@ -4844,70 +4844,3 @@ var data = {
     }
   ]
 }
-
-var members = data.results[0].members  //desglose del json para llegar a los members, cuando abra members ya voy a poder llamar a los valores
-var html = "" //defino lo que va adentro del div <table>, que voy a modificar en la funcion
-
-
-function convertirALinea(members) {
-  
-  if (!members.first_name) {
-    return ""
-  }
-
-  var linea = "<tr " + "class= '" + members.party + "' '" + members.state + "'>" + "<td>" + "<a href='" + members.url + "'>" //Convierte a link el nombre del senador  
-    + members.first_name + " ";
-
-    members.middle_name != null ? linea = linea + members.middle_name : "";
-
-  linea = linea
-    + " " + members.last_name + "</a></td><td>"  
-    + members.party + "</td><td>" 
-    + members.state + "</td><td>" 
-    + members.seniority + "</td><td>"
-    + members.votes_with_party_pct + "%" + "</td>";
-  "</tr>"
-  return linea
-}
-
-
-var html = members.reduce(function (item, j) {
-  return item + convertirALinea(j)
-}, "");
-
-document.getElementById("senateData").innerHTML = html  
-
-
-
-
-// 
-// function tableCreate() {
-//   for (var i = 0; i < members.length; i++) {
-// 
-//     html = html + "<tr>" + "<td>" + "<a href='" + item.url + "'>" //Convierte a link el nombre del senador  
-//       + item.first_name + " ";
-// 
-//     if (item.middle_name !== null) {
-//       html = html + item.middle_name
-//     }
-// 
-// 
-//     mylambda = item => item % 2 === 0 ? item : null;
-//     Array.filter(mylambda)
-// 
-// 
-//     html = html
-//       + item.last_name + "</a>" + "</td><td>"  //con item.nombreDeLaKey me devuelve los valores, en este caso los nombres, y concateno para hacer el fullname
-//       + item.party + "</td><td>" //acá saco la party
-//       + item.state + "</td><td>" //etc
-//       + item.seniority + "</td><td>"
-//       + item.votes_with_party_pct + "%" + "</td><td>";
-// 
-//     "</tr>"
-//   }
-// 
-//   return html //string que forma la table de senadores
-// 
-// }
-
-// tableCreate();  //llamo a la funcion ANTES de asignar el html al div en el html
