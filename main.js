@@ -18,17 +18,21 @@ var sticky = navbar.offsetTop;
 // Agrega la propiedad "sticky" cuando scrolleas, la saca cuando volves a la posicion default de la navbar
 function agregaClasesADivs() {
   if (window.pageYOffset >= sticky) {
-    navbar.classList.add("sticky-top")
+    navbar.classList.add("sticky-top");
   } else {
     navbar.classList.remove("sticky-top");
   }
 }
 
+//Declaro las variables de las party, agarro todos los elementos TR.
+
 var republicans = document.getElementsByClassName("R");
 var democrats = document.getElementsByClassName("D");
 var independent = document.getElementsByClassName("I");
 
-
+//Las siguientes 4 funciones reciben que checkbox está seleccionado, y filtran a las demás parties usando display: none
+//Al principio intente hacerlo todo en una función pero tuve muchos problemas, y esta manera funcionó, pero sigo pensando
+//en como puedo hacerlo en una sola función
 function republicanFilter(selectedParty) {
 
   if (selectedParty === "R") {
@@ -72,22 +76,38 @@ function independentFilter(selectedParty) {
   }
 }
 
-function filterName() {
-  // Declare variables 
-  var input, filter, table, tr, td, i, txtValue;
-  input = document.getElementById("myInput");
+function showAll(){
+  for (var i = 0; i < republicans.length; i++) {
+    republicans[i].classList.remove("hide");
+  }
+  for (var i = 0; i < democrats.length; i++) {
+    democrats[i].classList.remove("hide");
+  }
+  for (var i = 0; i < independent.length; i++) {
+    independent[i].classList.remove("hide");
+  }
+}
+
+
+//Search Bar!! llamo a esta función con onkeyup
+function filterByName() {
+
+  input = document.getElementById("searchInput");
   filter = input.value.toUpperCase();
   table = document.getElementById("senateData");
   tr = table.getElementsByTagName("tr");
 
-  // Loop through all table rows, and hide those who don't match the search query
+  // Loopea a traves de todas las TR, y esconde las que no coinciden con la busqueda
   for (i = 0; i < tr.length; i++) {
     td = tr[i].getElementsByTagName("td")[0];
+
     if (td) {
       txtValue = td.textContent || td.innerText;
+
       if (txtValue.toUpperCase().indexOf(filter) > -1) {
         tr[i].style.display = "";
-      } else {
+      } 
+      else {
         tr[i].style.display = "none";
       }
     } 
