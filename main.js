@@ -4,6 +4,7 @@
 var currentPage = "";
 var congressMembers = "";
 
+
 //Funcion que busca en que pagina está parado el js, y establece variables que permiten o no armar las tablas.
 function getCurrentPage() {
   if (document.getElementById("senateData") != null) {
@@ -22,6 +23,9 @@ function getCurrentPage() {
 }
 
 getCurrentPage();
+
+var filterCongressmen = []
+
 
 function createTable(members) {
   var middleName = members.middle_name || "";
@@ -59,6 +63,58 @@ var tableString =
     : "";
 
 document.getElementById(currentPage).innerHTML = tableString;
+
+
+
+//-----------------------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------------------------
+
+var stateList = []
+
+getStates(congressMembers);
+
+function getStates(members){
+
+  for (var i = 0; i < members.length; i++){
+    if (!stateList.includes(members[i].state)){
+      stateList.push(members[i].state);
+    }
+  }
+  stateList.sort();
+}
+
+
+//-----------------------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------------------------
+
+var dropdownSelect = "";
+
+function createStateDropdown(){
+
+  dropdownSelect += "<option value='All'>All</option>" ;
+
+  stateList.forEach(item => {
+    dropdownSelect += "<option value='" + item + "'>" + item + "</option>";
+  });
+  
+  return dropdownSelect;
+}
+
+
+
+createStateDropdown();
+document.getElementById("stateSelect").innerHTML = dropdownSelect
+
+
+//-----------------------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------------------------
+
+//TODO hacer los filtros de nuevo usando la funcion filter
+
+//TODO 
+
+
+
 
 //-----------------------------------------------------------------------------------------------
 //-----------------------------------------------------------------------------------------------
