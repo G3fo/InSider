@@ -4,7 +4,6 @@
 var currentPage = "";
 var congressMembers = "";
 
-
 //Funcion que busca en que pagina está parado el js, y establece variables que permiten o no armar las tablas.
 function getCurrentPage() {
   if (document.getElementById("senateData") != null) {
@@ -24,8 +23,7 @@ function getCurrentPage() {
 
 getCurrentPage();
 
-var filterCongressmen = []
-
+var filterCongressmen = congressMembers;
 
 function createTable(members) {
   var middleName = members.middle_name || "";
@@ -57,64 +55,55 @@ function createTable(members) {
 
 var tableString =
   currentPage != "anyOtherPageWithoutTable"
-    ? congressMembers.reduce(function(item, members) {
+    ? filterCongressmen.reduce(function(item, members) {
         return item + createTable(members);
       }, "")
     : "";
 
 document.getElementById(currentPage).innerHTML = tableString;
 
-
-
 //-----------------------------------------------------------------------------------------------
 //-----------------------------------------------------------------------------------------------
 
-var stateList = []
+//Crea la lista de estados a partir de json
+
+var stateList = [];
 
 getStates(congressMembers);
 
-function getStates(members){
-
-  for (var i = 0; i < members.length; i++){
-    if (!stateList.includes(members[i].state)){
+function getStates(members) {
+  for (var i = 0; i < members.length; i++) {
+    if (!stateList.includes(members[i].state)) {
       stateList.push(members[i].state);
     }
   }
   stateList.sort();
 }
 
-
-//-----------------------------------------------------------------------------------------------
-//-----------------------------------------------------------------------------------------------
+//Esta segunda funcion crea el dropdown adentro del <select>, usando el array que crea la funcion getStates
 
 var dropdownSelect = "";
 
-function createStateDropdown(){
-
-  dropdownSelect += "<option value='All'>All</option>" ;
-
+function createStateDropdown() {
+  dropdownSelect += "<option value='All'>All</option>";
   stateList.forEach(item => {
     dropdownSelect += "<option value='" + item + "'>" + item + "</option>";
   });
-  
+
   return dropdownSelect;
 }
 
-
-
 createStateDropdown();
-document.getElementById("stateSelect").innerHTML = dropdownSelect
-
+document.getElementById("stateSelect").innerHTML = dropdownSelect;
 
 //-----------------------------------------------------------------------------------------------
 //-----------------------------------------------------------------------------------------------
 
-//TODO hacer los filtros de nuevo usando la funcion filter
+//TODO hacer los filtros de nuevo usando la funcion filter y eliminar las 4 funciones que usaba para los checkboxes
 
-//TODO 
+//TODO hacer un array filtrado con todos los parametros de los botones chequeados y los filtros aplicados
 
-
-
+//TODO hacer que la funcion que crea la tabla, use el filtro, y que cada vez que el filtro es modificado, que re-cree la tabla
 
 //-----------------------------------------------------------------------------------------------
 //-----------------------------------------------------------------------------------------------
@@ -142,6 +131,9 @@ function agregaClasesADivs() {
   }
 }
 
+//-----------------------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------------------------
+
 //Declaro las variables de las party, agarro todos los elementos TR.
 
 var republicans = document.getElementsByClassName("R");
@@ -151,60 +143,61 @@ var independent = document.getElementsByClassName("I");
 //Las siguientes 4 funciones reciben que checkbox está seleccionado, y filtran a las demás parties usando display: none
 //Al principio intente hacerlo todo en una función pero tuve muchos problemas, y esta manera funcionó, pero sigo pensando
 //en como puedo hacerlo en una sola función
-function republicanFilter(selectedParty) {
-  if (selectedParty === "R") {
-    for (var i = 0; i < republicans.length; i++) {
-      republicans[i].classList.remove("hide");
-    }
-    for (var i = 0; i < democrats.length; i++) {
-      democrats[i].classList.add("hide");
-    }
-    for (var i = 0; i < independent.length; i++) {
-      independent[i].classList.add("hide");
-    }
-  }
-}
 
-function democratFilter(selectedParty) {
-  if (selectedParty === "D") {
-    for (var i = 0; i < democrats.length; i++) {
-      democrats[i].classList.remove("hide");
-    }
-    for (var i = 0; i < independent.length; i++) {
-      independent[i].classList.add("hide");
-    }
-    for (var i = 0; i < republicans.length; i++) {
-      republicans[i].classList.add("hide");
-    }
-  }
-}
+// function republicanFilter(selectedParty) {
+//   if (selectedParty === "R") {
+//     for (var i = 0; i < republicans.length; i++) {
+//       republicans[i].classList.remove("hide");
+//     }
+//     for (var i = 0; i < democrats.length; i++) {
+//       democrats[i].classList.add("hide");
+//     }
+//     for (var i = 0; i < independent.length; i++) {
+//       independent[i].classList.add("hide");
+//     }
+//   }
+// }
 
-function independentFilter(selectedParty) {
-  if (selectedParty === "I");
-  {
-    for (var i = 0; i < independent.length; i++) {
-      independent[i].classList.remove("hide");
-    }
-    for (var i = 0; i < republicans.length; i++) {
-      republicans[i].classList.add("hide");
-    }
-    for (var i = 0; i < democrats.length; i++) {
-      democrats[i].classList.add("hide");
-    }
-  }
-}
+// function democratFilter(selectedParty) {
+//   if (selectedParty === "D") {
+//     for (var i = 0; i < democrats.length; i++) {
+//       democrats[i].classList.remove("hide");
+//     }
+//     for (var i = 0; i < independent.length; i++) {
+//       independent[i].classList.add("hide");
+//     }
+//     for (var i = 0; i < republicans.length; i++) {
+//       republicans[i].classList.add("hide");
+//     }
+//   }
+// }
 
-function showAll() {
-  for (var i = 0; i < republicans.length; i++) {
-    republicans[i].classList.remove("hide");
-  }
-  for (var i = 0; i < democrats.length; i++) {
-    democrats[i].classList.remove("hide");
-  }
-  for (var i = 0; i < independent.length; i++) {
-    independent[i].classList.remove("hide");
-  }
-}
+// function independentFilter(selectedParty) {
+//   if (selectedParty === "I");
+//   {
+//     for (var i = 0; i < independent.length; i++) {
+//       independent[i].classList.remove("hide");
+//     }
+//     for (var i = 0; i < republicans.length; i++) {
+//       republicans[i].classList.add("hide");
+//     }
+//     for (var i = 0; i < democrats.length; i++) {
+//       democrats[i].classList.add("hide");
+//     }
+//   }
+// }
+
+// function showAll() {
+//   for (var i = 0; i < republicans.length; i++) {
+//     republicans[i].classList.remove("hide");
+//   }
+//   for (var i = 0; i < democrats.length; i++) {
+//     democrats[i].classList.remove("hide");
+//   }
+//   for (var i = 0; i < independent.length; i++) {
+//     independent[i].classList.remove("hide");
+//   }
+// }
 
 //Search Bar!! llamo a esta función con onkeyup
 function filterByName() {
@@ -228,3 +221,6 @@ function filterByName() {
     }
   }
 }
+
+
+function partyFilter()
