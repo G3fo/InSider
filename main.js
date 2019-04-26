@@ -55,7 +55,7 @@ function createTable(members) {
 
 var tableString =
   currentPage != "anyOtherPageWithoutTable"
-    ? filterCongressmen.reduce(function(item, members) {
+    ? congressMembers.reduce(function(item, members) {
         return item + createTable(members);
       }, "")
     : "";
@@ -140,64 +140,70 @@ var republicans = document.getElementsByClassName("R");
 var democrats = document.getElementsByClassName("D");
 var independent = document.getElementsByClassName("I");
 
+
+var stateDropdown = document.getElementById("stateSelect");
+var value = stateDropdown.options[stateDropdown.selectedIndex].value;
+var text = stateDropdown.options[stateDropdown.selectedIndex].text;
+
+
+
 //Las siguientes 4 funciones reciben que checkbox está seleccionado, y filtran a las demás parties usando display: none
 //Al principio intente hacerlo todo en una función pero tuve muchos problemas, y esta manera funcionó, pero sigo pensando
 //en como puedo hacerlo en una sola función
 
-// function republicanFilter(selectedParty) {
-//   if (selectedParty === "R") {
-//     for (var i = 0; i < republicans.length; i++) {
-//       republicans[i].classList.remove("hide");
-//     }
-//     for (var i = 0; i < democrats.length; i++) {
-//       democrats[i].classList.add("hide");
-//     }
-//     for (var i = 0; i < independent.length; i++) {
-//       independent[i].classList.add("hide");
-//     }
-//   }
-// }
+function partyFilter(party) {
+  if (party === "R") {
+    for (var i = 0; i < republicans.length; i++) {
+      republicans[i].classList.remove("hide");
+    }
+    for (var i = 0; i < democrats.length; i++) {
+      democrats[i].classList.add("hide");
+    }
+    for (var i = 0; i < independent.length; i++) {
+      independent[i].classList.add("hide");
+    }
+  } else if (party === "D") {
+    for (var i = 0; i < democrats.length; i++) {
+      democrats[i].classList.remove("hide");
+    }
+    for (var i = 0; i < independent.length; i++) {
+      independent[i].classList.add("hide");
+    }
+    for (var i = 0; i < republicans.length; i++) {
+      republicans[i].classList.add("hide");
+    }
+  } else if (party === "I") {
+    for (var i = 0; i < independent.length; i++) {
+      independent[i].classList.remove("hide");
+    }
+    for (var i = 0; i < republicans.length; i++) {
+      republicans[i].classList.add("hide");
+    }
+    for (var i = 0; i < democrats.length; i++) {
+      democrats[i].classList.add("hide");
+    }// 
+//     } else if (
+// 
+//       //TODO agregar los condicionales para que filtre por estado seleccionado
+// 
+//       //TODO se me ocurre hacerlo que cuando uno seleccione un estado, saque de display a todos los TR, y despues 
+//       //agregue los seleccionados con style.display = ""
+// 
+//     ){
 
-// function democratFilter(selectedParty) {
-//   if (selectedParty === "D") {
-//     for (var i = 0; i < democrats.length; i++) {
-//       democrats[i].classList.remove("hide");
-//     }
-//     for (var i = 0; i < independent.length; i++) {
-//       independent[i].classList.add("hide");
-//     }
-//     for (var i = 0; i < republicans.length; i++) {
-//       republicans[i].classList.add("hide");
-//     }
-//   }
-// }
-
-// function independentFilter(selectedParty) {
-//   if (selectedParty === "I");
-//   {
-//     for (var i = 0; i < independent.length; i++) {
-//       independent[i].classList.remove("hide");
-//     }
-//     for (var i = 0; i < republicans.length; i++) {
-//       republicans[i].classList.add("hide");
-//     }
-//     for (var i = 0; i < democrats.length; i++) {
-//       democrats[i].classList.add("hide");
-//     }
-//   }
-// }
-
-// function showAll() {
-//   for (var i = 0; i < republicans.length; i++) {
-//     republicans[i].classList.remove("hide");
-//   }
-//   for (var i = 0; i < democrats.length; i++) {
-//     democrats[i].classList.remove("hide");
-//   }
-//   for (var i = 0; i < independent.length; i++) {
-//     independent[i].classList.remove("hide");
-//   }
-// }
+    
+  } else {
+    for (var i = 0; i < republicans.length; i++) {
+      republicans[i].classList.remove("hide");
+    }
+    for (var i = 0; i < democrats.length; i++) {
+      democrats[i].classList.remove("hide");
+    }
+    for (var i = 0; i < independent.length; i++) {
+      independent[i].classList.remove("hide");
+    }
+  }
+}
 
 //Search Bar!! llamo a esta función con onkeyup
 function filterByName() {
@@ -221,6 +227,3 @@ function filterByName() {
     }
   }
 }
-
-
-function partyFilter()

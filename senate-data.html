@@ -69,14 +69,14 @@
 
 	<div class="container content" id="checkboxes">
 		<p>Filter by Party: </p>
-		<label><input type="radio" name="party" id="republican" onchange='republicanFilter("R")'> Republican </label>
-		<label><input type="radio" name="party" id="democrat" onchange='democratFilter("D")'> Democrat </label>
-		<label><input type="radio" name="party" id="independent" onchange='independentFilter("I")'> Independent </label>
+		<label><input type="radio" name="party" id="republican" onclick='partyFilter("")' checked> show All </label>
+		<label><input type="radio" name="party" id="republican" onclick='partyFilter("R")'> Republican </label>
+		<label><input type="radio" name="party" id="democrat" onclick='partyFilter("D")'> Democrat </label>
+		<label><input type="radio" name="party" id="independent" onclick='partyFilter("I")'> Independent </label>
 	</div>
 
 	<div class="container content">
 		<select name="state" id="stateSelect">
-
 		</select>
 	</div>
 
