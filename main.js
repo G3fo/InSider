@@ -140,12 +140,9 @@ var republicans = document.getElementsByClassName("R");
 var democrats = document.getElementsByClassName("D");
 var independent = document.getElementsByClassName("I");
 
-
 var stateDropdown = document.getElementById("stateSelect");
 var value = stateDropdown.options[stateDropdown.selectedIndex].value;
 var text = stateDropdown.options[stateDropdown.selectedIndex].text;
-
-
 
 //Las siguientes 4 funciones reciben que checkbox está seleccionado, y filtran a las demás parties usando display: none
 //Al principio intente hacerlo todo en una función pero tuve muchos problemas, y esta manera funcionó, pero sigo pensando
@@ -181,17 +178,15 @@ function partyFilter(party) {
     }
     for (var i = 0; i < democrats.length; i++) {
       democrats[i].classList.add("hide");
-    }// 
-//     } else if (
-// 
-//       //TODO agregar los condicionales para que filtre por estado seleccionado
-// 
-//       //TODO se me ocurre hacerlo que cuando uno seleccione un estado, saque de display a todos los TR, y despues 
-//       //agregue los seleccionados con style.display = ""
-// 
-//     ){
-
-    
+    } //
+    //     } else if (
+    //
+    //       //TODO agregar los condicionales para que filtre por estado seleccionado
+    //
+    //       //TODO se me ocurre hacerlo que cuando uno seleccione un estado, saque de display a todos los TR, y despues
+    //       //agregue los seleccionados con style.display = ""
+    //
+    //     ){
   } else {
     for (var i = 0; i < republicans.length; i++) {
       republicans[i].classList.remove("hide");
