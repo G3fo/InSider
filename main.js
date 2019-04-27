@@ -4,6 +4,14 @@
 var currentPage = "";
 var congressMembers = "";
 
+
+
+
+// let filteredCongressMembers = congressMembers.filter(val => { 
+//   return val.state === checkedState});
+
+
+
 //Funcion que busca en que pagina está parado el js, y establece variables que permiten o no armar las tablas.
 function getCurrentPage() {
   if (document.getElementById("senateData") != null) {
@@ -140,9 +148,7 @@ var republicans = document.getElementsByClassName("R");
 var democrats = document.getElementsByClassName("D");
 var independent = document.getElementsByClassName("I");
 
-var stateDropdown = document.getElementById("stateSelect");
-var value = stateDropdown.options[stateDropdown.selectedIndex].value;
-var text = stateDropdown.options[stateDropdown.selectedIndex].text;
+
 
 //Las siguientes 4 funciones reciben que checkbox está seleccionado, y filtran a las demás parties usando display: none
 //Al principio intente hacerlo todo en una función pero tuve muchos problemas, y esta manera funcionó, pero sigo pensando
@@ -222,3 +228,8 @@ function filterByName() {
     }
   }
 }
+
+
+var stateDropdown = document.getElementById("stateSelect");
+var value = stateDropdown.options[stateDropdown.selectedIndex].value;
+var checkedState = stateDropdown.options[stateDropdown.selectedIndex].text;
