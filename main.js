@@ -4,13 +4,8 @@
 var currentPage = "";
 var congressMembers = "";
 
-
-
-
-// let filteredCongressMembers = congressMembers.filter(val => { 
+// let filteredCongressMembers = congressMembers.filter(val => {
 //   return val.state === checkedState});
-
-
 
 //Funcion que busca en que pagina está parado el js, y establece variables que permiten o no armar las tablas.
 function getCurrentPage() {
@@ -73,26 +68,23 @@ document.getElementById(currentPage).innerHTML = tableString;
 //-----------------------------------------------------------------------------------------------
 //-----------------------------------------------------------------------------------------------
 
-//Crea la lista de estados a partir de json
-
+//Crea la lista de estados a partir de json y crea el dropdown adentro del <select>, usando el array de states
+var dropdownSelect = "";
 var stateList = [];
 
-getStates(congressMembers);
+createStateDropdown(congressMembers);
 
-function getStates(members) {
+function createStateDropdown(members) {
+  //Función de dos partes, la primera genera un array ordenado con todos los estados.
+
   for (var i = 0; i < members.length; i++) {
     if (!stateList.includes(members[i].state)) {
       stateList.push(members[i].state);
     }
   }
   stateList.sort();
-}
 
-//Esta segunda funcion crea el dropdown adentro del <select>, usando el array que crea la funcion getStates
-
-var dropdownSelect = "";
-
-function createStateDropdown() {
+  //Y de acá para abajo crea todas las opciones del dropdown
   dropdownSelect += "<option value='All'>All</option>";
   stateList.forEach(item => {
     dropdownSelect += "<option value='" + item + "'>" + item + "</option>";
@@ -100,8 +92,7 @@ function createStateDropdown() {
 
   return dropdownSelect;
 }
-
-createStateDropdown();
+console.log(stateList);
 document.getElementById("stateSelect").innerHTML = dropdownSelect;
 
 //-----------------------------------------------------------------------------------------------
@@ -148,11 +139,7 @@ var republicans = document.getElementsByClassName("R");
 var democrats = document.getElementsByClassName("D");
 var independent = document.getElementsByClassName("I");
 
-
-
-//Las siguientes 4 funciones reciben que checkbox está seleccionado, y filtran a las demás parties usando display: none
-//Al principio intente hacerlo todo en una función pero tuve muchos problemas, y esta manera funcionó, pero sigo pensando
-//en como puedo hacerlo en una sola función
+//Recibe que checkbox está seleccionado, y filtran a las demás parties usando display: none
 
 function partyFilter(party) {
   if (party === "R") {
@@ -184,15 +171,7 @@ function partyFilter(party) {
     }
     for (var i = 0; i < democrats.length; i++) {
       democrats[i].classList.add("hide");
-    } //
-    //     } else if (
-    //
-    //       //TODO agregar los condicionales para que filtre por estado seleccionado
-    //
-    //       //TODO se me ocurre hacerlo que cuando uno seleccione un estado, saque de display a todos los TR, y despues
-    //       //agregue los seleccionados con style.display = ""
-    //
-    //     ){
+    }
   } else {
     for (var i = 0; i < republicans.length; i++) {
       republicans[i].classList.remove("hide");
@@ -228,7 +207,6 @@ function filterByName() {
     }
   }
 }
-
 
 var stateDropdown = document.getElementById("stateSelect");
 var value = stateDropdown.options[stateDropdown.selectedIndex].value;
