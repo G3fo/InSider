@@ -26,8 +26,6 @@ function getCurrentPage() {
 
 getCurrentPage();
 
-var filterCongressmen = congressMembers;
-
 function createTable(members) {
   var middleName = members.middle_name || "";
   var linea =
@@ -56,9 +54,11 @@ function createTable(members) {
   return linea;
 }
 
+var filterCongressmen = congressMembers;
+
 var tableString =
   currentPage != "anyOtherPageWithoutTable"
-    ? congressMembers.reduce(function(item, members) {
+    ? filterCongressmen.reduce(function(item, members) {
         return item + createTable(members);
       }, "")
     : "";
@@ -92,7 +92,7 @@ function createStateDropdown(members) {
 
   return dropdownSelect;
 }
-console.log(stateList);
+
 document.getElementById("stateSelect").innerHTML = dropdownSelect;
 
 //-----------------------------------------------------------------------------------------------
@@ -185,6 +185,30 @@ function partyFilter(party) {
   }
 }
 
+//-----------------------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------------------------
+
+var selectedState = document.getElementById("stateSelect").value;
+
+function updateTableWithNewState() {
+  var selectedState = document.getElementById("stateSelect").value;
+
+  filterCongressmen = congressMembers.filter(
+    member => member.state === selectedState
+  );
+
+  selectedState == "All" ? filterCongressmen = congressMembers : "";
+
+  tableString = filterCongressmen.reduce(function(item, members) {
+    return item + createTable(members);
+  }, "");
+
+  document.getElementById(currentPage).innerHTML = tableString;
+}
+
+//-----------------------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------------------------
+
 //Search Bar!! llamo a esta función con onkeyup
 function filterByName() {
   input = document.getElementById("searchInput");
@@ -207,7 +231,3 @@ function filterByName() {
     }
   }
 }
-
-var stateDropdown = document.getElementById("stateSelect");
-var value = stateDropdown.options[stateDropdown.selectedIndex].value;
-var checkedState = stateDropdown.options[stateDropdown.selectedIndex].text;
