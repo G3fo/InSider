@@ -4,8 +4,6 @@
 var currentPage = "";
 var congressMembers = "";
 
-// let filteredCongressMembers = congressMembers.filter(val => {
-//   return val.state === checkedState});
 
 //Funcion que busca en que pagina está parado el js, y establece variables que permiten o no armar las tablas.
 function getCurrentPage() {
@@ -68,7 +66,7 @@ document.getElementById(currentPage).innerHTML = tableString;
 //-----------------------------------------------------------------------------------------------
 //-----------------------------------------------------------------------------------------------
 
-//Crea la lista de estados a partir de json y crea el dropdown adentro del <select>, usando el array de states
+// Crea la lista de estados a partir de json y crea el dropdown adentro del <select>, usando el array de states
 var dropdownSelect = "";
 var stateList = [];
 
@@ -98,14 +96,6 @@ document.getElementById("stateSelect").innerHTML = dropdownSelect;
 //-----------------------------------------------------------------------------------------------
 //-----------------------------------------------------------------------------------------------
 
-//TODO hacer los filtros de nuevo usando la funcion filter y eliminar las 4 funciones que usaba para los checkboxes
-
-//TODO hacer un array filtrado con todos los parametros de los botones chequeados y los filtros aplicados
-
-//TODO hacer que la funcion que crea la tabla, use el filtro, y que cada vez que el filtro es modificado, que re-cree la tabla
-
-//-----------------------------------------------------------------------------------------------
-//-----------------------------------------------------------------------------------------------
 
 //Hice todo esto al pedo porque bootstrap tiene una clase que se llama sticky-top que hace esto por vos.
 
@@ -197,7 +187,7 @@ function updateTableWithNewState() {
     member => member.state === selectedState
   );
 
-  selectedState == "All" ? filterCongressmen = congressMembers : "";
+  selectedState == "All" ? (filterCongressmen = congressMembers) : "";
 
   tableString = filterCongressmen.reduce(function(item, members) {
     return item + createTable(members);

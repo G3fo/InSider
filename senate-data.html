@@ -13,11 +13,13 @@
       crossorigin="anonymous"
     />
     <link rel="stylesheet" type="text/css" href="main.css" />
-    <link
+    <!--
+      <link
       rel="stylesheet"
       type="text/css"
       href="https://stackpath.bootstrapcdn.com/bootswatch/4.3.1/darkly/bootstrap.min.css"
     />
+  -->
     <title>Senators</title>
   </head>
 
@@ -114,18 +116,20 @@
         ><input
           type="radio"
           name="party"
-          id="republican"
-          onclick='partyFilter("")'
+          id="all"
+          value="All"
+          onclick="partyFilter();"
           checked
         />
-        show All
+        Show All
       </label>
       <label
         ><input
           type="radio"
           name="party"
           id="republican"
-          onclick='partyFilter("R")'
+          value="R"
+          onclick='partyFilter("R");'
         />
         Republican
       </label>
@@ -134,7 +138,8 @@
           type="radio"
           name="party"
           id="democrat"
-          onclick='partyFilter("D")'
+          value="D"
+          onclick='partyFilter("D");'
         />
         Democrat
       </label>
@@ -143,16 +148,20 @@
           type="radio"
           name="party"
           id="independent"
-          onclick='partyFilter("I")'
+          value="I"
+          onclick='partyFilter("I");'
         />
         Independent
       </label>
     </div>
 
-    <div class="container content">
-      <select id="stateSelect" onchange="updateTableWithNewState();"> 
-      </select>
-    </div>
+    <div id="dropdown" class="container content">
+        Filter By State:
+        <select id="stateSelect" onchange="updateTableWithNewState();">
+        </select>
+      </div>
+
+    <br />
 
     <table class="container table table-hover">
       <thead>
