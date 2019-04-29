@@ -72,10 +72,19 @@
             </div>
           </li>
         </ul>
+
+        <form class="form-inline my-2 my-lg-0">
+          <input
+            class="form-control mr-sm-2"
+            type="search"
+            id="searchInput"
+            placeholder="Search for name..."
+            aria-label="Search"
+            onkeyup="filterByName()"
+          />
+        </form>
       </div>
     </nav>
-
-    <!--Table container-->
 
     <div class="container content">
       <div>
@@ -98,7 +107,62 @@
         </p>
       </div>
 
-      <table class="container table table-striped table-hover">
+      <br />
+
+      <div class="container content">
+        Filter by Party:
+        <label
+          ><input
+            type="radio"
+            name="party"
+            id="all"
+            value="All"
+            onclick="partyFilter();"
+            checked
+          />
+          Show All
+        </label>
+        <label
+          ><input
+            type="radio"
+            name="party"
+            id="republican"
+            value="R"
+            onclick='partyFilter("R");'
+          />
+          Republican
+        </label>
+        <label
+          ><input
+            type="radio"
+            name="party"
+            id="democrat"
+            value="D"
+            onclick='partyFilter("D");'
+          />
+          Democrat
+        </label>
+        <label
+          ><input
+            type="radio"
+            name="party"
+            id="independent"
+            value="I"
+            onclick='partyFilter("I");'
+          />
+          Independent
+        </label>
+      </div>
+
+      <div id="dropdown" class="container content">
+        Filter By State:
+        <select id="stateSelect" onchange="updateTableWithNewState();">
+        </select>
+      </div>
+
+      <br />
+
+      <table class="container table table-hover">
         <thead>
           <tr>
             <td>Name</td>
@@ -112,7 +176,7 @@
       </table>
     </div>
 
-    <footer class="container content bg-light border my-auto">
+    <footer id="footer" class="container content bg-light border my-auto">
       <p>&copy; 2016 TGIF | All Right Reserved</p>
     </footer>
 

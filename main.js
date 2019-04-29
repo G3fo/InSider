@@ -70,7 +70,7 @@ document.getElementById(currentPage).innerHTML = tableString;
 var dropdownSelect = "";
 var stateList = [];
 
-createStateDropdown(congressMembers);
+
 
 function createStateDropdown(members) {
   //Función de dos partes, la primera genera un array ordenado con todos los estados.
@@ -91,6 +91,8 @@ function createStateDropdown(members) {
   return dropdownSelect;
 }
 
+
+createStateDropdown(congressMembers);
 document.getElementById("stateSelect").innerHTML = dropdownSelect;
 
 //-----------------------------------------------------------------------------------------------
@@ -203,7 +205,7 @@ function updateTableWithNewState() {
 function filterByName() {
   input = document.getElementById("searchInput");
   filter = input.value.toUpperCase();
-  table = document.getElementById("senateData");
+  table = document.getElementById(currentPage);
   tr = table.getElementsByTagName("tr");
 
   // Loopea a traves de todas las TR, y esconde las que no coinciden con la busqueda

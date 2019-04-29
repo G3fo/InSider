@@ -3,13 +3,6 @@
   text-decoration: none !important;
 }
 
-header{
-  margin-top: 10px;
-  margin-bottom: 10px;
-  height: 75px;
-  width: 100%;
-  display: flex;
-}
 
 .hide{
   display: none;
@@ -28,29 +21,35 @@ tr{
   width: auto;
 }
 
+#accordion{
+  width: 70%;
+}
+
+#homeLogo{
+  width: 25%;
+  
+}
+
 #page-container {
   position: relative;
-  height: 100vh;
+  min-height: 100%;
 }
 
 #content-wrap{
   position: relative;
-  margin-bottom: 3em;
+  padding-bottom: 46px;
 }
 
-/* #footer{  
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  border-top-left-radius: 5px;
-  border-top-right-radius: 5px;
-  height: 3em;
-} */
+#footer{
+  position: relative;
+  margin-top: -46px;
+  clear: both;
+}
 
 footer p{
   text-align: center;
   padding: 10px;
-  /* margin: auto; */
+  margin: auto;
 }
 
 .card-header {
@@ -65,4 +64,8 @@ footer p{
   -ms-flex: 1 1 auto;
   flex: 1 1 auto;
   padding: 1.25rem;
+}
+
+html {
+  overflow-y:scroll;
 }
