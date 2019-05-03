@@ -21,15 +21,6 @@ tr{
   width: auto;
 }
 
-#accordion{
-  width: 70%;
-}
-
-#homeLogo{
-  width: 25%;
-  
-}
-
 #page-container {
   position: relative;
   min-height: 100%;
@@ -38,6 +29,10 @@ tr{
 #content-wrap{
   position: relative;
   padding-bottom: 46px;
+}
+
+#homeLogo{
+  width: 100%;
 }
 
 #footer{

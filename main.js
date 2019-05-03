@@ -56,9 +56,9 @@ var filterCongressmen = congressMembers;
 
 var tableString =
   currentPage != "anyOtherPageWithoutTable"
-    ? filterCongressmen.reduce(function(item, members) {
-        return item + createTable(members);
-      }, "")
+    ? filterCongressmen.reduce(function (item, members) {
+      return item + createTable(members);
+    }, "")
     : "";
 
 document.getElementById(currentPage).innerHTML = tableString;
@@ -102,7 +102,7 @@ document.getElementById("stateSelect").innerHTML = dropdownSelect;
 //Hice todo esto al pedo porque bootstrap tiene una clase que se llama sticky-top que hace esto por vos.
 
 // Cuando el usuario scrollea, ejecuta my function
-window.onscroll = function() {
+window.onscroll = function () {
   agregaClasesADivs();
 };
 
@@ -191,7 +191,7 @@ function updateTableWithNewState() {
 
   selectedState == "All" ? (filterCongressmen = congressMembers) : "";
 
-  tableString = filterCongressmen.reduce(function(item, members) {
+  tableString = filterCongressmen.reduce(function (item, members) {
     return item + createTable(members);
   }, "");
 
