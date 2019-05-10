@@ -1,28 +1,9 @@
 //-----------------------------------------------------------------------------------------------
 //-----------------------------------------------------------------------------------------------
 
-var currentPage = "";
-var congressMembers = "";
 
+var congressMembers = data.results[0].members;
 
-//Funcion que busca en que pagina está parado el js, y establece variables que permiten o no armar las tablas.
-function getCurrentPage() {
-  if (document.getElementById("senateData") != null) {
-    return (
-      (currentPage = "senateData") &&
-      (congressMembers = senateData.results[0].members)
-    );
-  } else if (document.getElementById("houseData") != null) {
-    return (
-      (currentPage = "houseData") &&
-      (congressMembers = houseData.results[0].members)
-    );
-  } else {
-    return (currentPage = "anyOtherPageWithoutTable");
-  }
-}
-
-getCurrentPage();
 
 function createTable(members) {
   var middleName = members.middle_name || "";
@@ -54,14 +35,12 @@ function createTable(members) {
 
 var filterCongressmen = congressMembers;
 
-var tableString =
-  currentPage != "anyOtherPageWithoutTable"
-    ? filterCongressmen.reduce(function (item, members) {
-      return item + createTable(members);
-    }, "")
-    : "";
+var tableString = filterCongressmen.reduce(function (item, members) {
+  return item + createTable(members);
+}, "");
 
-document.getElementById(currentPage).innerHTML = tableString;
+
+document.getElementById("data").innerHTML = tableString
 
 //-----------------------------------------------------------------------------------------------
 //-----------------------------------------------------------------------------------------------
@@ -91,8 +70,9 @@ function createStateDropdown(members) {
   return dropdownSelect;
 }
 
-
 createStateDropdown(congressMembers);
+
+
 document.getElementById("stateSelect").innerHTML = dropdownSelect;
 
 //-----------------------------------------------------------------------------------------------
@@ -127,60 +107,58 @@ function agregaClasesADivs() {
 
 //Declaro las variables de las party, agarro todos los elementos TR.
 
-var republicans = document.getElementsByClassName("R");
-var democrats = document.getElementsByClassName("D");
-var independent = document.getElementsByClassName("I");
+var republicansList = document.getElementsByClassName("R");
+var democratsList = document.getElementsByClassName("D");
+var independentList = document.getElementsByClassName("I");
 
 //Recibe que checkbox está seleccionado, y filtran a las demás parties usando display: none
 
 function partyFilter(party) {
   if (party === "R") {
-    for (var i = 0; i < republicans.length; i++) {
-      republicans[i].classList.remove("hide");
+    for (var i = 0; i < republicansList.length; i++) {
+      republicansList[i].classList.remove("hide");
     }
-    for (var i = 0; i < democrats.length; i++) {
-      democrats[i].classList.add("hide");
+    for (var i = 0; i < democratsList.length; i++) {
+      democratsList[i].classList.add("hide");
     }
-    for (var i = 0; i < independent.length; i++) {
-      independent[i].classList.add("hide");
+    for (var i = 0; i < independentList.length; i++) {
+      independentList[i].classList.add("hide");
     }
   } else if (party === "D") {
-    for (var i = 0; i < democrats.length; i++) {
-      democrats[i].classList.remove("hide");
+    for (var i = 0; i < democratsList.length; i++) {
+      democratsList[i].classList.remove("hide");
     }
-    for (var i = 0; i < independent.length; i++) {
-      independent[i].classList.add("hide");
+    for (var i = 0; i < independentList.length; i++) {
+      independentList[i].classList.add("hide");
     }
-    for (var i = 0; i < republicans.length; i++) {
-      republicans[i].classList.add("hide");
+    for (var i = 0; i < republicansList.length; i++) {
+      republicansList[i].classList.add("hide");
     }
   } else if (party === "I") {
-    for (var i = 0; i < independent.length; i++) {
-      independent[i].classList.remove("hide");
+    for (var i = 0; i < independentList.length; i++) {
+      independentList[i].classList.remove("hide");
     }
-    for (var i = 0; i < republicans.length; i++) {
-      republicans[i].classList.add("hide");
+    for (var i = 0; i < republicansList.length; i++) {
+      republicansList[i].classList.add("hide");
     }
-    for (var i = 0; i < democrats.length; i++) {
-      democrats[i].classList.add("hide");
+    for (var i = 0; i < democratsList.length; i++) {
+      democratsList[i].classList.add("hide");
     }
   } else {
-    for (var i = 0; i < republicans.length; i++) {
-      republicans[i].classList.remove("hide");
+    for (var i = 0; i < republicansList.length; i++) {
+      republicansList[i].classList.remove("hide");
     }
-    for (var i = 0; i < democrats.length; i++) {
-      democrats[i].classList.remove("hide");
+    for (var i = 0; i < democratsList.length; i++) {
+      democratsList[i].classList.remove("hide");
     }
-    for (var i = 0; i < independent.length; i++) {
-      independent[i].classList.remove("hide");
+    for (var i = 0; i < independentList.length; i++) {
+      independentList[i].classList.remove("hide");
     }
   }
 }
 
 //-----------------------------------------------------------------------------------------------
 //-----------------------------------------------------------------------------------------------
-
-var selectedState = document.getElementById("stateSelect").value;
 
 function updateTableWithNewState() {
   var selectedState = document.getElementById("stateSelect").value;
@@ -195,7 +173,7 @@ function updateTableWithNewState() {
     return item + createTable(members);
   }, "");
 
-  document.getElementById(currentPage).innerHTML = tableString;
+  document.getElementById("data").innerHTML = tableString;
 }
 
 //-----------------------------------------------------------------------------------------------
@@ -205,7 +183,7 @@ function updateTableWithNewState() {
 function filterByName() {
   input = document.getElementById("searchInput");
   filter = input.value.toUpperCase();
-  table = document.getElementById(currentPage);
+  table = document.getElementById("data");
   tr = table.getElementsByTagName("tr");
 
   // Loopea a traves de todas las TR, y esconde las que no coinciden con la busqueda
