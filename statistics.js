@@ -58,9 +58,9 @@ function getAverageVoteWithParty(partyList) {
 }
 
 function getLeast(array, key, topOrLow) {
-  topOrLow = -1
-    ? array.sort((a, b) => (a.key < b.key ? 1 : b.key < a.key ? -1 : 0))
-    : array.sort((a, b) => (a.key > b.key ? 1 : b.key > a.key ? -1 : 0));
+  topOrLow == -1
+    ? array.sort((a, b) => (a.key > b.key ? 1 : b.key > a.key ? -1 : 0))
+    : array.sort((a, b) => (a.key < b.key ? 1 : b.key < a.key ? -1 : 0));
 
   for (i = 0; i <= array.length / 10; i++) {
     least.push(array[i]);
