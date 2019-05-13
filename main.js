@@ -1,9 +1,7 @@
 //-----------------------------------------------------------------------------------------------
 //-----------------------------------------------------------------------------------------------
 
-
 var congressMembers = data.results[0].members;
-
 
 function createTable(members) {
   var middleName = members.middle_name || "";
@@ -35,12 +33,11 @@ function createTable(members) {
 
 var filterCongressmen = congressMembers;
 
-var tableString = filterCongressmen.reduce(function (item, members) {
+var tableString = filterCongressmen.reduce(function(item, members) {
   return item + createTable(members);
 }, "");
 
-
-document.getElementById("data").innerHTML = tableString
+document.getElementById("data").innerHTML = tableString;
 
 //-----------------------------------------------------------------------------------------------
 //-----------------------------------------------------------------------------------------------
@@ -48,8 +45,6 @@ document.getElementById("data").innerHTML = tableString
 // Crea la lista de estados a partir de json y crea el dropdown adentro del <select>, usando el array de states
 var dropdownSelect = "";
 var stateList = [];
-
-
 
 function createStateDropdown(members) {
   //Función de dos partes, la primera genera un array ordenado con todos los estados.
@@ -72,17 +67,15 @@ function createStateDropdown(members) {
 
 createStateDropdown(congressMembers);
 
-
 document.getElementById("stateSelect").innerHTML = dropdownSelect;
 
 //-----------------------------------------------------------------------------------------------
 //-----------------------------------------------------------------------------------------------
 
-
 //Hice todo esto al pedo porque bootstrap tiene una clase que se llama sticky-top que hace esto por vos.
 
 // Cuando el usuario scrollea, ejecuta my function
-window.onscroll = function () {
+window.onscroll = function() {
   agregaClasesADivs();
 };
 
@@ -169,7 +162,7 @@ function updateTableWithNewState() {
 
   selectedState == "All" ? (filterCongressmen = congressMembers) : "";
 
-  tableString = filterCongressmen.reduce(function (item, members) {
+  tableString = filterCongressmen.reduce(function(item, members) {
     return item + createTable(members);
   }, "");
 
@@ -202,12 +195,8 @@ function filterByName() {
   }
 }
 
-
-
 //-----------------------------------------------------------------------------------------------
 //-----------------------------------------------------------------------------------------------
 
 //-----------------------------------------------------------------------------------------------
 //-----------------------------------------------------------------------------------------------
-
-
