@@ -29,24 +29,16 @@ statistics.numberOfDemocrats = democrats.length;
 statistics.numberOfRepublicans = republicans.length;
 statistics.numberOfIndependents = independent.length;
 statistics.total = congressMembers.length;
+
 statistics.democratsAverageVoteWithParty = getAverageVoteWithParty(democrats);
-
-statistics.republicansAverageVoteWithParty = getAverageVoteWithParty(
-  republicans
-);
-
-statistics.independentAverageVoteWithParty = getAverageVoteWithParty(
-  independent
-);
+statistics.republicansAverageVoteWithParty = getAverageVoteWithParty(republicans);
+statistics.independentAverageVoteWithParty = getAverageVoteWithParty(independent);
 
 statistics.totalAverage = getAverageVoteWithParty(congressMembers);
+statistics.leastLoyal = getTopTen(congressMembers,"votes_with_party_pct","des");
+// statistics.mostLoyal = getTopTen(congressMembers,"votes_with_party_pct","asc");
 
-statistics.leastLoyal = getLeast(
-  congressMembers,
-  congressMembers.votes_with_party_pct,
-  -1
-);
-
+//Funcion que calcula el promedio
 function getAverageVoteWithParty(partyList) {
   var percentageNumber = 0;
 
@@ -57,19 +49,22 @@ function getAverageVoteWithParty(partyList) {
   return percentageNumber / partyList.length;
 }
 
-function getLeast(array, key, topOrLow) {
-  topOrLow == -1
-    ? array.sort((a, b) => (a.key > b.key ? 1 : b.key > a.key ? -1 : 0))
-    : array.sort((a, b) => (a.key < b.key ? 1 : b.key < a.key ? -1 : 0));
+//Funcion que recibe un array, una key seleccionada del json, y el orden (asc o des)
+function getTopTen(array, key, orden) {
+  var tenPercent = array.length / 10;
 
-  for (i = 0; i <= array.length / 10; i++) {
+  //Ordena el array de menos a mayor o viceversa
+  orden == "des"
+    ? array.sort((a, b) => (a[key] > b[key] ? 1 : b[key] > a[key] ? -1 : 0))
+    : array.sort((a, b) => (a[key] < b[key] ? 1 : b[key] < a[key] ? -1 : 0));
+
+  //Loop que agrega a un array el primer 10% de los elementos del array inicial
+  for (i = 0; least.length <= tenPercent; i++) {
     least.push(array[i]);
-    // array[i + 1].key == array[i].key ? least.push(array[i + 1]) : "";
+    array[i][key] == array[i+1][key] ? least.push(array[i+1] && i++) : "";
   }
-
   return least;
 }
 
-console.log(congressMembers);
 console.log(statistics);
 console.log(least);
