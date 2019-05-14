@@ -14,7 +14,6 @@ var statistics = {
 };
 
 var congressMembers = data.results[0].members;
-var topTen = [];
 var democrats = [];
 var republicans = [];
 var independent = [];
@@ -35,15 +34,11 @@ statistics.republicansAverageVoteWithParty = getAverageVoteWithParty(republicans
 statistics.independentAverageVoteWithParty = getAverageVoteWithParty(independent);
 
 statistics.totalAverage = getAverageVoteWithParty(congressMembers);
-
 statistics.leastLoyal = getTopTen(congressMembers, "votes_with_party_pct", "des");
-console.log(topTen);
 statistics.mostLoyal = getTopTen(congressMembers, "votes_with_party_pct", "asc");
-console.log(topTen);
 statistics.mostengaged = getTopTen(congressMembers, "missed_votes_pct", "des");
-console.log(topTen);
 statistics.leastEngaged = getTopTen(congressMembers, "missed_votes_pct", "asc");
-console.log(topTen);
+
 
 //Funcion que calcula el promedio
 function getAverageVoteWithParty(partyList) {
@@ -58,7 +53,9 @@ function getAverageVoteWithParty(partyList) {
 
 //Funcion que recibe un array, una key seleccionada del json, y el orden (asc o des)
 function getTopTen(array, key, orden) {
+  
   var tenPercent = array.length / 10;
+  var topTen = [];
 
   //Ordena el array de menos a mayor o viceversa
   orden == "des"
@@ -68,11 +65,13 @@ function getTopTen(array, key, orden) {
   //Loop que agrega a un array el primer 10% de los elementos del array inicial
   for (i = 0; topTen.length <= tenPercent; i++) {
     topTen.push(array[i]);
-    array[i][key] == array[i+1][key] ? topTen.push(array[i+1] && i++) : "";
+
+    while (array[i][key] == array[i + 1][key]) {
+      topTen.push(array[i + 1]);
+      i++;
+    }
   }
   return topTen;
 }
 
 console.log(statistics);
-console.log(topTen);
-console.log()
