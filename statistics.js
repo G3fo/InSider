@@ -13,6 +13,10 @@ var statistics = {
   mostLoyal: []
 };
 
+var glance = document.getElementById("glance");
+var mLoyal = document.getElementById("mostLoyal");
+var lLoyal = document.getElementById("leastLoyal");
+
 var congressMembers = data.results[0].members;
 var democrats = [];
 var republicans = [];
@@ -32,8 +36,8 @@ statistics.total = congressMembers.length;
 statistics.democratsAverageVoteWithParty = getAverageVoteWithParty(democrats);
 statistics.republicansAverageVoteWithParty = getAverageVoteWithParty(republicans);
 statistics.independentAverageVoteWithParty = getAverageVoteWithParty(independent);
-
 statistics.totalAverage = getAverageVoteWithParty(congressMembers);
+
 statistics.leastLoyal = getTopTen(congressMembers, "votes_with_party_pct", "des");
 statistics.mostLoyal = getTopTen(congressMembers, "votes_with_party_pct", "asc");
 statistics.mostengaged = getTopTen(congressMembers, "missed_votes_pct", "des");
@@ -57,7 +61,7 @@ function getTopTen(array, key, orden) {
   var tenPercent = array.length / 10;
   var topTen = [];
 
-  //Ordena el array de menos a mayor o viceversa
+  //Ordena el array de menor a mayor o viceversa
   orden == "des"
     ? array.sort((a, b) => (a[key] > b[key] ? 1 : b[key] > a[key] ? -1 : 0))
     : array.sort((a, b) => (a[key] < b[key] ? 1 : b[key] < a[key] ? -1 : 0));
@@ -75,3 +79,10 @@ function getTopTen(array, key, orden) {
 }
 
 console.log(statistics);
+
+
+createStatisticsTable()
+
+function createStatisticsTable(list, tableLocation){
+
+}
