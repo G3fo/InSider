@@ -13,11 +13,22 @@ var statistics = {
   mostLoyal: []
 };
 
-var glance = document.getElementById("glance");
-var mLoyal = document.getElementById("mostLoyal");
-var lLoyal = document.getElementById("leastLoyal");
-
 var congressMembers = data.results[0].members;
+
+getFullName(congressMembers)
+
+function getFullName(array) {
+  array.forEach(item => {
+    var middleName = item.middle_name || "";
+    item.full_name = item.first_name + " " + middleName + " " + item.last_name;
+    item.party_votes = Math.trunc(item.total_votes * item.votes_with_party_pct / 100)
+  });
+}
+
+var glance = document.getElementById("glance");
+var mostTable = document.getElementById("most");
+var leastTable = document.getElementById("least");
+
 var democrats = [];
 var republicans = [];
 var independent = [];
@@ -57,14 +68,14 @@ function getAverageVoteWithParty(partyList) {
 
 //Funcion que recibe un array, una key seleccionada del json, y el orden (asc o des)
 function getTopTen(array, key, orden) {
-  
+
   var tenPercent = array.length / 10;
   var topTen = [];
 
   //Ordena el array de menor a mayor o viceversa
-  orden == "des"
-    ? array.sort((a, b) => (a[key] > b[key] ? 1 : b[key] > a[key] ? -1 : 0))
-    : array.sort((a, b) => (a[key] < b[key] ? 1 : b[key] < a[key] ? -1 : 0));
+  orden == "des" ?
+    array.sort((a, b) => (a[key] > b[key] ? 1 : b[key] > a[key] ? -1 : 0)) :
+    array.sort((a, b) => (a[key] < b[key] ? 1 : b[key] < a[key] ? -1 : 0));
 
   //Loop que agrega a un array el primer 10% de los elementos del array inicial
   for (i = 0; topTen.length <= tenPercent; i++) {
@@ -78,11 +89,22 @@ function getTopTen(array, key, orden) {
   return topTen;
 }
 
-console.log(statistics);
 
+createStatisticsTable(leastTable, statistics.leastLoyal);
+createStatisticsTable(mostTable, statistics.mostLoyal);
+createGlanceTable(glance);
 
-createStatisticsTable()
+function createStatisticsTable(table, members) {
+  var linea = ""
 
-function createStatisticsTable(list, tableLocation){
+  members.forEach(function (item) {
+    linea += "<tr><td>" + item.full_name + "</td><td>" + item.party_votes + "</td><td>" + item.votes_with_party_pct + "</td></tr>";
+  });
+  table.innerHTML = linea;
+}
 
+function createGlanceTable(table){
+  table.innerHTML += "<tr><td>Republican</td><td>" + statistics.numberOfRepublicans + "</td><td>" + statistics.republicansAverageVoteWithParty + "</td><tr>" +
+    "<tr><td>Democrats</td><td>" + statistics.numberOfDemocrats + "</td><td>" + statistics.democratsAverageVoteWithParty + "</td><tr>" +
+    "<tr><td>Independents</td><td>" + statistics.numberOfIndependents + "</td><td>" + statistics.independentAverageVoteWithParty + "</td><tr>"
 }
