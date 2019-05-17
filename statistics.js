@@ -21,7 +21,8 @@ function getFullName(array) {
   array.forEach(item => {
     var middleName = item.middle_name || "";
     item.full_name = item.first_name + " " + middleName + " " + item.last_name;
-    item.party_votes = Math.trunc(item.total_votes * item.votes_with_party_pct / 100)
+    item.total_present = item.total_votes - item.missed_votes;
+    item.party_votes = Math.trunc(item.total_present * item.votes_with_party_pct / 100)
   });
 }
 
@@ -44,15 +45,15 @@ statistics.numberOfRepublicans = republicans.length;
 statistics.numberOfIndependents = independent.length;
 statistics.total = congressMembers.length;
 
-statistics.democratsAverageVoteWithParty = getAverageVoteWithParty(democrats);
-statistics.republicansAverageVoteWithParty = getAverageVoteWithParty(republicans);
-statistics.independentAverageVoteWithParty = getAverageVoteWithParty(independent);
+statistics.democratsAverageVoteWithParty = getAverageVoteWithParty(democrats).toFixed(2);
+statistics.republicansAverageVoteWithParty = getAverageVoteWithParty(republicans).toFixed(2);
+statistics.independentAverageVoteWithParty = getAverageVoteWithParty(independent).toFixed(2);
 statistics.totalAverage = getAverageVoteWithParty(congressMembers);
 
-statistics.leastLoyal = getTopTen(congressMembers, "votes_with_party_pct", "des");
-statistics.mostLoyal = getTopTen(congressMembers, "votes_with_party_pct", "asc");
-statistics.mostengaged = getTopTen(congressMembers, "missed_votes_pct", "des");
-statistics.leastEngaged = getTopTen(congressMembers, "missed_votes_pct", "asc");
+statistics.leastLoyal = getTopTen(congressMembers, "votes_with_party_pct", true);
+statistics.mostLoyal = getTopTen(congressMembers, "votes_with_party_pct", false);
+statistics.mostengaged = getTopTen(congressMembers, "missed_votes_pct", false);
+statistics.leastEngaged = getTopTen(congressMembers, "missed_votes_pct", true);
 
 
 //Funcion que calcula el promedio
@@ -68,42 +69,32 @@ function getAverageVoteWithParty(partyList) {
 
 //Funcion que recibe un array, una key seleccionada del json, y el orden (asc o des)
 function getTopTen(array, key, orden) {
-
+  var i = 0
   var tenPercent = array.length / 10;
   var topTen = [];
 
-  //Ordena el array de menor a mayor o viceversa
-  orden == "des" ?
-    array.sort((a, b) => (a[key] > b[key] ? 1 : b[key] > a[key] ? -1 : 0)) :
-    array.sort((a, b) => (a[key] < b[key] ? 1 : b[key] < a[key] ? -1 : 0));
+  array.sort((a,b) => orden ? a[key] - b[key] : b[key] - a[key])
 
   //Loop que agrega a un array el primer 10% de los elementos del array inicial
-  for (i = 0; topTen.length <= tenPercent; i++) {
+  while (i < tenPercent || array[i][key] == array[i + 1][key]) {
     topTen.push(array[i]);
-
-    while (array[i][key] == array[i + 1][key]) {
-      topTen.push(array[i + 1]);
-      i++;
-    }
+    i++;
   }
   return topTen;
 }
 
-
-createStatisticsTable(leastTable, statistics.leastLoyal);
-createStatisticsTable(mostTable, statistics.mostLoyal);
 createGlanceTable(glance);
 
-function createStatisticsTable(table, members) {
+function createStatisticsTable(table, members, key1, key2) {
   var linea = ""
 
   members.forEach(function (item) {
-    linea += "<tr><td>" + item.full_name + "</td><td>" + item.party_votes + "</td><td>" + item.votes_with_party_pct + "</td></tr>";
+    linea += "<tr><td>" + item.full_name + "</td><td>" + item[key1] + "</td><td>" + item[key2] + "</td></tr>";
   });
   table.innerHTML = linea;
 }
 
-function createGlanceTable(table){
+function createGlanceTable(table) {
   table.innerHTML += "<tr><td>Republican</td><td>" + statistics.numberOfRepublicans + "</td><td>" + statistics.republicansAverageVoteWithParty + "</td><tr>" +
     "<tr><td>Democrats</td><td>" + statistics.numberOfDemocrats + "</td><td>" + statistics.democratsAverageVoteWithParty + "</td><tr>" +
     "<tr><td>Independents</td><td>" + statistics.numberOfIndependents + "</td><td>" + statistics.independentAverageVoteWithParty + "</td><tr>"

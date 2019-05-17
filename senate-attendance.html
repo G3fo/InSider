@@ -96,7 +96,7 @@
 			</div>
 			<div class="col content">
 				<h2>Senate at a glance</h2>
-				<table  class="table table-hover">
+				<table class="table table-hover">
 					<thead>
 						<tr>
 							<th>Party</th>
@@ -104,8 +104,8 @@
 							<th>% Voted with Prty</th>
 						</tr>
 					</thead>
-					<tbody  id="glance">
-					
+					<tbody id="glance">
+
 					</tbody>
 				</table>
 			</div>
@@ -124,7 +124,7 @@
 						</tr>
 					</thead>
 					<tbody id="least">
-					
+
 					</tbody>
 				</table>
 			</div>
@@ -156,14 +156,18 @@
 		<script src="113-senate.js"></script>
 		<script src="statistics.js"></script>
 		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-			integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-			crossorigin="anonymous"></script>
+			integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+		</script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-			integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-			crossorigin="anonymous"></script>
+			integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+		</script>
 		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-			integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-			crossorigin="anonymous"></script>
+			integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+		</script>
+		<script>
+			createStatisticsTable(leastTable, statistics.mostengaged, "missed_votes", "missed_votes_pct");
+			createStatisticsTable(mostTable, statistics.leastEngaged, "missed_votes", "missed_votes_pct");
+		</script>
 </body>
 
 </html>
