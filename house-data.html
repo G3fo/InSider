@@ -19,7 +19,7 @@
   <body>
     <nav
       id="navbar"
-      class="container navbar navbar-expand-md navbar-light bg-light border sticky-top"
+      class="container navbar navbar-expand-lg navbar-light bg-light border sticky-top"
     >
       <a class="navbar-brand" href="index.html">
         <img
@@ -66,9 +66,49 @@
             </a>
 
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="#">House</a>
+              <a class="dropdown-item" href="house-data.html">House</a>
               <div class="dropdown-divider"></div>
               <a class="dropdown-item" href="senate-data.html">Senate</a>
+            </div>
+          </li>
+          <li class="nav-item dropdown">
+            <a
+              class="nav-link dropdown-toggle"
+              href="#"
+              id="navbarDropdown"
+              role="button"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+              Attendance
+            </a>
+
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="house-attendance.html">House</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="senate-attendance.html">Senate</a>
+            </div>
+          </li>
+          <li class="nav-item dropdown">
+            <a
+              class="nav-link dropdown-toggle"
+              href="#"
+              id="navbarDropdown"
+              role="button"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+              Party Loyalty
+            </a>
+
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="house-party-loyalty.html">House</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="senate-party-loyalty.html"
+                >Senate</a
+              >
             </div>
           </li>
         </ul>
@@ -172,7 +212,7 @@
             <td>% Votes with party</td>
           </tr>
         </thead>
-        <tbody id="houseData"></tbody>
+        <tbody id="data"></tbody>
       </table>
     </div>
 
