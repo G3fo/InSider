@@ -102,8 +102,8 @@ function updateTableWithNewState() {
     document.querySelectorAll("input[name=partyCheckbox]:checked")
   ).map(elt => elt.value);
 
-  filterCongressmen = congressMembers.filter(
-    member => selectedState == "All" ? true : member.state === selectedState
+  filterCongressmen = congressMembers.filter(member =>
+    selectedState == "All" ? true : member.state === selectedState
   );
 
   filterCongressmen = filterCongressmen.filter(member =>
