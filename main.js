@@ -98,69 +98,23 @@ function agregaClasesADivs() {
 //-----------------------------------------------------------------------------------------------
 //-----------------------------------------------------------------------------------------------
 
-//Declaro las variables de las party, agarro todos los elementos TR.
-
-var republicansList = document.getElementsByClassName("R");
-var democratsList = document.getElementsByClassName("D");
-var independentList = document.getElementsByClassName("I");
-
-//Recibe que checkbox está seleccionado, y filtran a las demás parties usando display: none
-
-function partyFilter(party) {
-  if (party === "R") {
-    for (var i = 0; i < republicansList.length; i++) {
-      republicansList[i].classList.remove("hide");
-    }
-    for (var i = 0; i < democratsList.length; i++) {
-      democratsList[i].classList.add("hide");
-    }
-    for (var i = 0; i < independentList.length; i++) {
-      independentList[i].classList.add("hide");
-    }
-  } else if (party === "D") {
-    for (var i = 0; i < democratsList.length; i++) {
-      democratsList[i].classList.remove("hide");
-    }
-    for (var i = 0; i < independentList.length; i++) {
-      independentList[i].classList.add("hide");
-    }
-    for (var i = 0; i < republicansList.length; i++) {
-      republicansList[i].classList.add("hide");
-    }
-  } else if (party === "I") {
-    for (var i = 0; i < independentList.length; i++) {
-      independentList[i].classList.remove("hide");
-    }
-    for (var i = 0; i < republicansList.length; i++) {
-      republicansList[i].classList.add("hide");
-    }
-    for (var i = 0; i < democratsList.length; i++) {
-      democratsList[i].classList.add("hide");
-    }
-  } else {
-    for (var i = 0; i < republicansList.length; i++) {
-      republicansList[i].classList.remove("hide");
-    }
-    for (var i = 0; i < democratsList.length; i++) {
-      democratsList[i].classList.remove("hide");
-    }
-    for (var i = 0; i < independentList.length; i++) {
-      independentList[i].classList.remove("hide");
-    }
-  }
-}
-
-//-----------------------------------------------------------------------------------------------
-//-----------------------------------------------------------------------------------------------
-
 function updateTableWithNewState() {
   var selectedState = document.getElementById("stateSelect").value;
+  var checkedBoxes = Array.from(
+    document.querySelectorAll("input[name=partyCheckbox]:checked")
+  ).map(elt => elt.value);
+
+  console.log(checkedBoxes);
 
   filterCongressmen = congressMembers.filter(
     member => member.state === selectedState
   );
 
   selectedState == "All" ? (filterCongressmen = congressMembers) : "";
+
+  filterCongressmen = filterCongressmen.filter(member =>
+    checkedBoxes.includes(member.party)
+  );
 
   tableString = filterCongressmen.reduce(function(item, members) {
     return item + createTable(members);

@@ -154,7 +154,7 @@
 
       <div class="container content">
         Filter by Party:
-        <label
+        <!-- <label
           ><input
             type="radio"
             name="party"
@@ -164,34 +164,34 @@
             checked
           />
           Show All
-        </label>
+        </label> -->
         <label
           ><input
-            type="radio"
-            name="party"
-            id="republican"
+            type="checkbox"
+            name="partyCheckbox"
             value="R"
-            onclick='partyFilter("R");'
+            onclick='updateTableWithNewState();'
+            checked
           />
           Republican
         </label>
         <label
           ><input
-            type="radio"
-            name="party"
-            id="democrat"
+            type="checkbox"
+            name="partyCheckbox"
             value="D"
-            onclick='partyFilter("D");'
+            onclick='updateTableWithNewState();'
+            checked
           />
           Democrat
         </label>
         <label
           ><input
-            type="radio"
-            name="party"
-            id="independent"
+            type="checkbox"
+            name="partyCheckbox"
             value="I"
-            onclick='partyFilter("I");'
+            onclick='updateTableWithNewState();'
+            checked
           />
           Independent
         </label>
