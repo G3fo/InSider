@@ -72,8 +72,6 @@ document.getElementById("stateSelect").innerHTML = dropdownSelect;
 //-----------------------------------------------------------------------------------------------
 //-----------------------------------------------------------------------------------------------
 
-//Hice todo esto al pedo porque bootstrap tiene una clase que se llama sticky-top que hace esto por vos.
-
 // Cuando el usuario scrollea, ejecuta my function
 window.onscroll = function() {
   agregaClasesADivs();
@@ -104,13 +102,9 @@ function updateTableWithNewState() {
     document.querySelectorAll("input[name=partyCheckbox]:checked")
   ).map(elt => elt.value);
 
-  console.log(checkedBoxes);
-
   filterCongressmen = congressMembers.filter(
-    member => member.state === selectedState
+    member => selectedState == "All" ? true : member.state === selectedState
   );
-
-  selectedState == "All" ? (filterCongressmen = congressMembers) : "";
 
   filterCongressmen = filterCongressmen.filter(member =>
     checkedBoxes.includes(member.party)
@@ -148,9 +142,6 @@ function filterByName() {
     }
   }
 }
-
-//-----------------------------------------------------------------------------------------------
-//-----------------------------------------------------------------------------------------------
 
 //-----------------------------------------------------------------------------------------------
 //-----------------------------------------------------------------------------------------------
