@@ -1,7 +1,7 @@
 //-----------------------------------------------------------------------------------------------
 //-----------------------------------------------------------------------------------------------
 
-var congressMembers = []
+var congressMembers = [];
 
 function createTable(members) {
   var middleName = members.middle_name || "";
@@ -39,6 +39,10 @@ function initialize() {
   }, "");
 
   document.getElementById("data").innerHTML = tableString;
+
+  createStateDropdown(congressMembers);
+
+  document.getElementById("stateSelect").innerHTML = dropdownSelect;
 }
 
 //-----------------------------------------------------------------------------------------------
@@ -66,10 +70,6 @@ function createStateDropdown(members) {
 
   return dropdownSelect;
 }
-
-createStateDropdown(congressMembers);
-
-document.getElementById("stateSelect").innerHTML = dropdownSelect;
 
 //-----------------------------------------------------------------------------------------------
 //-----------------------------------------------------------------------------------------------
