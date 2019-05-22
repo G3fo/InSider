@@ -3,46 +3,63 @@
 
 var congressMembers = [];
 
-function createTable(members) {
-  var middleName = members.middle_name || "";
-  var linea =
-    "<tr class= '" +
-    members.party +
-    "' '" +
-    members.state +
-    "'><td><a href='" +
-    members.url +
-    "'>" + //Convierte a link el nombre del senador
-    members.first_name +
-    " " +
-    middleName +
-    " " +
-    members.last_name +
-    "</a></td><td>" +
-    members.party +
-    "</td><td>" +
-    members.state +
-    "</td><td>" +
-    members.seniority +
-    "</td><td>" +
-    members.votes_with_party_pct +
-    "%</td></tr>";
+var app = new Vue({  
+  el: '#app',  
+  data: {congressMembers}
+}); 
 
-  return linea;
-}
+// function createTable(members) {
+//   var middleName = members.middle_name || "";
+//   var linea =
+//     "<tr class= '" +
+//     members.party +
+//     "' '" +
+//     members.state +
+//     "'><td><a href='" +
+//     members.url +
+//     "'>" + //Convierte a link el nombre del senador
+//     members.first_name +
+//     " " +
+//     middleName +
+//     " " +
+//     members.last_name +
+//     "</a></td><td>" +
+//     members.party +
+//     "</td><td>" +
+//     members.state +
+//     "</td><td>" +
+//     members.seniority +
+//     "</td><td>" +
+//     members.votes_with_party_pct +
+//     "%</td></tr>";
+
+//   return linea;
+// }
 
 function initialize() {
   var filterCongressmen = congressMembers;
 
-  var tableString = filterCongressmen.reduce(function(item, members) {
-    return item + createTable(members);
-  }, "");
+  // var tableString = filterCongressmen.reduce(function(item, members) {
+  //   return item + createTable(members);
+  // }, "");
 
-  document.getElementById("data").innerHTML = tableString;
+  // document.getElementById("data").innerHTML = tableString;
 
   createStateDropdown(congressMembers);
-
+  getFullName(congressMembers);
   document.getElementById("stateSelect").innerHTML = dropdownSelect;
+}
+
+
+function getFullName(array) {
+  array.forEach(item => {
+    var middleName = item.middle_name || "";
+    item.full_name = item.first_name + " " + middleName + " " + item.last_name;
+    item.total_present = item.total_votes - item.missed_votes;
+    item.party_votes = Math.trunc(
+      (item.total_present * item.votes_with_party_pct) / 100
+    );
+  });
 }
 
 //-----------------------------------------------------------------------------------------------

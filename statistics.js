@@ -18,7 +18,7 @@ var congressMembers = data.results[0].members;
 //-----------------------------------------------------------------------------------------------
 //-----------------------------------------------------------------------------------------------
 
-getFullName(congressMembers);
+// getFullName(congressMembers);
 
 function getFullName(array) {
   array.forEach(item => {

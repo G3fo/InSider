@@ -8,3 +8,5 @@ fetch("https://api.propublica.org/congress/v1/113/house/members.json", {
   })
   .then(function(){initialize()})
   .catch(err => console.log(err));
+
+  console.log(data);
