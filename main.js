@@ -1,7 +1,7 @@
 //-----------------------------------------------------------------------------------------------
 //-----------------------------------------------------------------------------------------------
 
-var congressMembers = data.results[0].members;
+var congressMembers = []
 
 function createTable(members) {
   var middleName = members.middle_name || "";
@@ -31,13 +31,15 @@ function createTable(members) {
   return linea;
 }
 
-var filterCongressmen = congressMembers;
+function initialize() {
+  var filterCongressmen = congressMembers;
 
-var tableString = filterCongressmen.reduce(function(item, members) {
-  return item + createTable(members);
-}, "");
+  var tableString = filterCongressmen.reduce(function(item, members) {
+    return item + createTable(members);
+  }, "");
 
-document.getElementById("data").innerHTML = tableString;
+  document.getElementById("data").innerHTML = tableString;
+}
 
 //-----------------------------------------------------------------------------------------------
 //-----------------------------------------------------------------------------------------------
