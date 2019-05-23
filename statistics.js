@@ -8,7 +8,7 @@ var statistics = {
   independentAverageVoteWithParty: 0,
   totalAverage: 0,
   leastEngaged: [],
-  mostengaged: [],
+  mostEngaged: [],
   leastLoyal: [],
   mostLoyal: [],
   democrats: [],
@@ -30,7 +30,7 @@ var vueLeast = new Vue({
 
 var vueGlance = new Vue({
   el: "#glance",
-  data: statistics
+  data:  statistics 
 });
 
 //-----------------------------------------------------------------------------------------------
@@ -71,7 +71,7 @@ function initialize() {
     "votes_with_party_pct",
     false
   );
-  statistics.mostengaged = getTopTen(
+  statistics.mostEngaged = getTopTen(
     congressMembers,
     "missed_votes_pct",
     false
@@ -82,8 +82,6 @@ function initialize() {
     true
   );
     
-			vueLeast.members = statistics.mostEngaged;
-			vueMost.members =  statistics.leastEngaged;
   createVueTables();
 }
 
