@@ -7,6 +7,7 @@
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
 		integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
 	<link rel="stylesheet" type="text/css" href="main.css" />
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 	<title>House Attendance</title>
 </head>
 
@@ -104,7 +105,7 @@
 						</tr>
 					</thead>
 					<tbody id="glance">
-
+						
 					</tbody>
 				</table>
 			</div>
@@ -123,8 +124,12 @@
 						</tr>
 					</thead>
 					<tbody id="least">
-
-					</tbody>
+							<tr v-for="member in members">
+								<td>{{ member.full_name }}</td>
+								<td>{{ member.missed_votes }}</td>
+								<td>{{ member.missed_votes_pct }}</td>
+							</tr>
+						</tbody>
 				</table>
 			</div>
 			<div class="col content">
@@ -138,17 +143,14 @@
 						</tr>
 					</thead>
 					<tbody id="most">
-
+						<tr v-for="member in members">
+							<td>{{ member.full_name }}</td>
+							<td>{{ member.missed_votes }}</td>
+							<td>{{ member.missed_votes_pct }}</td>
+						</tr>
 					</tbody>
 				</table>
 			</div>
-
-		</div>
-
-		<div>
-
-
-
 
 		</div>
 
@@ -164,8 +166,10 @@
 			integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
 		</script>
 		<script>
-			createStatisticsTable(leastTable, statistics.mostengaged, "missed_votes", "missed_votes_pct");
-			createStatisticsTable(mostTable, statistics.leastEngaged, "missed_votes", "missed_votes_pct");
+		function createVueTables(){
+			vueLeast.members = statistics.mostEngaged;
+			vueMost.members =  statistics.leastEngaged;
+		}
 		</script>
 </body>
 

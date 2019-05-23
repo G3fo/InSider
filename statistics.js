@@ -10,15 +10,85 @@ var statistics = {
   leastEngaged: [],
   mostengaged: [],
   leastLoyal: [],
-  mostLoyal: []
+  mostLoyal: [],
+  democrats: [],
+  republicans: [],
+  independent: []
 };
 
-var congressMembers = data.results[0].members;
+var congressMembers = [];
+
+var vueMost = new Vue({
+  el: "#most",
+  data: { members: [] }
+});
+
+var vueLeast = new Vue({
+  el: "#least",
+  data: { members: [] }
+});
+
+var vueGlance = new Vue({
+  el: "#glance",
+  data: statistics
+});
 
 //-----------------------------------------------------------------------------------------------
 //-----------------------------------------------------------------------------------------------
 
-// getFullName(congressMembers);
+function initialize() {
+  getFullName(congressMembers);
+
+  congressMembers.forEach(item => {
+    item.party == "D" ? statistics.democrats.push(item) : "";
+    item.party == "R" ? statistics.republicans.push(item) : "";
+    item.party == "I" ? statistics.independent.push(item) : "";
+  });
+
+  statistics.numberOfDemocrats = statistics.democrats.length;
+  statistics.numberOfRepublicans = statistics.republicans.length;
+  statistics.numberOfIndependents = statistics.independent.length;
+  statistics.total = congressMembers.length;
+
+  statistics.democratsAverageVoteWithParty = getAverageVoteWithParty(
+    statistics.democrats
+  ).toFixed(2);
+  statistics.republicansAverageVoteWithParty = getAverageVoteWithParty(
+    statistics.republicans
+  ).toFixed(2);
+  statistics.independentAverageVoteWithParty = getAverageVoteWithParty(
+    statistics.independent
+  ).toFixed(2);
+  statistics.totalAverage = getAverageVoteWithParty(congressMembers);
+
+  statistics.leastLoyal = getTopTen(
+    congressMembers,
+    "votes_with_party_pct",
+    true
+  );
+  statistics.mostLoyal = getTopTen(
+    congressMembers,
+    "votes_with_party_pct",
+    false
+  );
+  statistics.mostengaged = getTopTen(
+    congressMembers,
+    "missed_votes_pct",
+    false
+  );
+  statistics.leastEngaged = getTopTen(
+    congressMembers,
+    "missed_votes_pct",
+    true
+  );
+    
+			vueLeast.members = statistics.mostEngaged;
+			vueMost.members =  statistics.leastEngaged;
+  createVueTables();
+}
+
+//-----------------------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------------------------
 
 function getFullName(array) {
   array.forEach(item => {
@@ -30,55 +100,6 @@ function getFullName(array) {
     );
   });
 }
-
-//-----------------------------------------------------------------------------------------------
-//-----------------------------------------------------------------------------------------------
-
-var glance = document.getElementById("glance");
-var mostTable = document.getElementById("most");
-var leastTable = document.getElementById("least");
-
-var democrats = [];
-var republicans = [];
-var independent = [];
-
-congressMembers.forEach(item => {
-  item.party == "D" ? democrats.push(item) : "";
-  item.party == "R" ? republicans.push(item) : "";
-  item.party == "I" ? independent.push(item) : "";
-});
-
-statistics.numberOfDemocrats = democrats.length;
-statistics.numberOfRepublicans = republicans.length;
-statistics.numberOfIndependents = independent.length;
-statistics.total = congressMembers.length;
-
-statistics.democratsAverageVoteWithParty = getAverageVoteWithParty(
-  democrats
-).toFixed(2);
-statistics.republicansAverageVoteWithParty = getAverageVoteWithParty(
-  republicans
-).toFixed(2);
-statistics.independentAverageVoteWithParty = getAverageVoteWithParty(
-  independent
-).toFixed(2);
-statistics.totalAverage = getAverageVoteWithParty(congressMembers);
-
-//-----------------------------------------------------------------------------------------------
-//-----------------------------------------------------------------------------------------------
-
-statistics.leastLoyal = getTopTen(
-  congressMembers,
-  "votes_with_party_pct",
-  true
-);
-statistics.mostLoyal = getTopTen(
-  congressMembers,
-  "votes_with_party_pct",
-  false
-);
-statistics.mostengaged = getTopTen(congressMembers, "missed_votes_pct", false);
-statistics.leastEngaged = getTopTen(congressMembers, "missed_votes_pct", true);
 
 //-----------------------------------------------------------------------------------------------
 //-----------------------------------------------------------------------------------------------
@@ -111,47 +132,4 @@ function getTopTen(array, key, orden) {
     i++;
   }
   return topTen;
-}
-
-createGlanceTable(glance);
-
-//-----------------------------------------------------------------------------------------------
-//-----------------------------------------------------------------------------------------------
-
-function createStatisticsTable(table, members, key1, key2) {
-  var linea = "";
-
-  members.forEach(function(item) {
-    linea +=
-      "<tr><td>" +
-      item.full_name +
-      "</td><td>" +
-      item[key1] +
-      "</td><td>" +
-      item[key2] +
-      "</td></tr>";
-  });
-  table.innerHTML = linea;
-}
-
-//-----------------------------------------------------------------------------------------------
-//-----------------------------------------------------------------------------------------------
-
-function createGlanceTable(table) {
-  table.innerHTML +=
-    "<tr><td>Republican</td><td>" +
-    statistics.numberOfRepublicans +
-    "</td><td>" +
-    statistics.republicansAverageVoteWithParty +
-    "</td><tr>" +
-    "<tr><td>Democrats</td><td>" +
-    statistics.numberOfDemocrats +
-    "</td><td>" +
-    statistics.democratsAverageVoteWithParty +
-    "</td><tr>" +
-    "<tr><td>Independents</td><td>" +
-    statistics.numberOfIndependents +
-    "</td><td>" +
-    statistics.independentAverageVoteWithParty +
-    "</td><tr>";
 }
