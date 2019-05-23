@@ -2,54 +2,21 @@
 //-----------------------------------------------------------------------------------------------
 
 var congressMembers = [];
+var filterCongressmen = [];
 
-var app = new Vue({  
-  el: '#app',  
-  data: {congressMembers}
-}); 
-
-// function createTable(members) {
-//   var middleName = members.middle_name || "";
-//   var linea =
-//     "<tr class= '" +
-//     members.party +
-//     "' '" +
-//     members.state +
-//     "'><td><a href='" +
-//     members.url +
-//     "'>" + //Convierte a link el nombre del senador
-//     members.first_name +
-//     " " +
-//     middleName +
-//     " " +
-//     members.last_name +
-//     "</a></td><td>" +
-//     members.party +
-//     "</td><td>" +
-//     members.state +
-//     "</td><td>" +
-//     members.seniority +
-//     "</td><td>" +
-//     members.votes_with_party_pct +
-//     "%</td></tr>";
-
-//   return linea;
-// }
+var app = new Vue({
+  el: "#app",
+  data: { members: [] }
+});
 
 function initialize() {
-  var filterCongressmen = congressMembers;
-
-  // var tableString = filterCongressmen.reduce(function(item, members) {
-  //   return item + createTable(members);
-  // }, "");
-
-  // document.getElementById("data").innerHTML = tableString;
+  getFullName(congressMembers);
+  filterCongressmen = congressMembers;
+  app.members = filterCongressmen;
 
   createStateDropdown(congressMembers);
-  getFullName(congressMembers);
   document.getElementById("stateSelect").innerHTML = dropdownSelect;
 }
-
 
 function getFullName(array) {
   array.forEach(item => {
@@ -99,7 +66,6 @@ window.onscroll = function() {
 //  Agarra la navbar y el header
 var navbar = document.getElementById("navbar");
 var header = document.getElementById("header");
-
 // Obtiene la posicion de la navbar
 var sticky = navbar.offsetTop;
 
@@ -115,6 +81,7 @@ function agregaClasesADivs() {
 //-----------------------------------------------------------------------------------------------
 //-----------------------------------------------------------------------------------------------
 
+//Funcion que modifica la lista de congresistas en base
 function updateTableWithNewState() {
   var selectedState = document.getElementById("stateSelect").value;
   var checkedBoxes = Array.from(
@@ -129,11 +96,7 @@ function updateTableWithNewState() {
     checkedBoxes.includes(member.party)
   );
 
-  tableString = filterCongressmen.reduce(function(item, members) {
-    return item + createTable(members);
-  }, "");
-
-  document.getElementById("data").innerHTML = tableString;
+  app.members = filterCongressmen;
 }
 
 //-----------------------------------------------------------------------------------------------

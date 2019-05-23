@@ -12,6 +12,7 @@
       integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
       crossorigin="anonymous"
     />
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <link rel="stylesheet" type="text/css" href="main.css" />
     <title>Congressmen</title>
   </head>
@@ -156,7 +157,7 @@
             type="checkbox"
             name="partyCheckbox"
             value="R"
-            onclick='updateTableWithNewState();'
+            onclick="updateTableWithNewState();"
             checked
           />
           Republican
@@ -166,7 +167,7 @@
             type="checkbox"
             name="partyCheckbox"
             value="D"
-            onclick='updateTableWithNewState();'
+            onclick="updateTableWithNewState();"
             checked
           />
           Democrat
@@ -176,7 +177,7 @@
             type="checkbox"
             name="partyCheckbox"
             value="I"
-            onclick='updateTableWithNewState();'
+            onclick="updateTableWithNewState();"
             checked
           />
           Independent
@@ -201,7 +202,15 @@
             <td>% Votes with party</td>
           </tr>
         </thead>
-        <tbody id="data"></tbody>
+        <tbody id="app">
+          <tr v-for="member in members">
+            <td>{{ member.full_name }}</td>
+            <td>{{ member.party }}</td>
+            <td>{{ member.state }}</td>
+            <td>{{ member.seniority }}</td>
+            <td>{{ member.votes_with_party_pct }}</td>
+          </tr>
+        </tbody>
       </table>
     </div>
 

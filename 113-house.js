@@ -6,7 +6,7 @@ fetch("https://api.propublica.org/congress/v1/113/house/members.json", {
   .then(data => {
     congressMembers = data.results[0].members;
   })
-  .then(function(){initialize()})
+  .then(function() {
+    initialize();
+  })
   .catch(err => console.log(err));
-
-  console.log(data);
